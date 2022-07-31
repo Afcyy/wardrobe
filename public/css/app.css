@@ -3771,21 +3771,21 @@ textarea.form-control.is-invalid {
   margin-left: auto;
   margin-right: auto;
 }
-.my-1 {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
 }
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -3895,12 +3895,6 @@ textarea.form-control.is-invalid {
 .h-32 {
   height: 8rem;
 }
-.h-12 {
-  height: 3rem;
-}
-.h-auto {
-  height: auto;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -3936,12 +3930,6 @@ textarea.form-control.is-invalid {
 }
 .w-24 {
   width: 6rem;
-}
-.w-12 {
-  width: 3rem;
-}
-.w-2 {
-  width: 0.5rem;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -4129,15 +4117,6 @@ textarea.form-control.is-invalid {
 }
 .fill-current {
   fill: currentColor;
-}
-.stroke-blue-500 {
-  stroke: #3b82f6;
-}
-.stroke-green-700 {
-  stroke: #15803d;
-}
-.stroke-blue-400 {
-  stroke: #60a5fa;
 }
 .stroke-indigo-500 {
   stroke: #6366f1;
