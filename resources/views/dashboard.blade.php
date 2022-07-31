@@ -1,42 +1,43 @@
 <x-app-layout>
     <div class="w-screen">
         <div class="flex justify-center items-center mx-auto sm:px-6 lg:px-8 h-screen">
-            <div class="overflow-hidden bg-white shadow-sm rounded-md sm:rounded-lg flex flex-row h-4/5 w-4/5">
-                <div id="outfit" class="flex justify-center items-center p-6 border-b border-gray-200 w-1/3 h-full">
+            <div class="md:overflow-hidden overflow-y-auto bg-white shadow-sm rounded-md sm:rounded-lg flex md:flex-row flex-col md:justify-center items-center h-4/5 w-11/12">
+                <div id="outfit" class="flex justify-center items-center p-6 border-b border-gray-200 lg:w-2/4 w-full h-full">
                     <div class="flex flex-col items-center justify-center">
                         {{-- Hat --}}
                         <div class="relative group">
-                            <img id="hats" class="w-32 h-32 bg-white my-1 object-scale-down"
+                            <img id="hats" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
-                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-sm text-blue-500 cursor-default">Click to remove</p>
+                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">Click to remove</p>
                         </div>
                         <div class="flex flex-row my-1">
-                            <div class="bg-center w-32 h-32 bg-white mx-1 text-gray-300">Accessory 1</div>
+                            <div class="bg-center lg:h-36 w-24 h-24 bg-white mx-1 text-gray-300">Accessory 1</div>
                             {{-- Top --}}
                             <div class="relative group">
-                                <img id="tops" class="w-32 h-32 bg-white my-1 object-cover"
+                                <img id="tops" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
-                                <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-sm text-blue-500 cursor-default">Click to remove</p>
+                                <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">Click to remove</p>
                             </div>
-                            <div class="w-32 h-32 bg-white mx-1 text-gray-300">Accessory 2</div>
+                            <div class="lg:h-36 w-24 h-24 bg-white mx-1 text-gray-300">Accessory 2</div>
                         </div>
                         {{-- Bottom --}}
                         <div class="relative group">
-                            <img id="bottoms" class="w-32 h-32 bg-white my-1 object-cover"
+                            <img id="bottoms" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
-                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-sm text-blue-500 cursor-default">Click to remove</p>
+                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">Click to remove</p>
                         </div>
                         {{-- Shoes --}}
                         <div class="relative group">
-                            <img id="shoes" class="w-32 h-32 bg-white my-1 object-cover"
+                            <img id="shoes" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
-                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-sm text-blue-500 cursor-default">Click to remove</p>
+                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">Click to remove</p>
                         </div>
                     </div>
                 </div>
-                <div class="w-2/3 h-full overflow-y-auto">
+                <div class="w-full sm:w-full h-full md:overflow-y-auto">
                     <div class="accordion accordion-flush" id="accordion">
                         <div class="accordion accordion-flush" id="hatsAccordion">
+                            <p class="text-xl font-bold m-6 text-black">Wardrobe</p>
                             <div
                                 id="hats" class="accordion-item rounded-none">
                                 <h2 class="accordion-header mb-0" id="flush-headingTops">
@@ -52,13 +53,13 @@
                                     <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
                                         <img
                                             src="https://static.zara.net/photos///2022/V/0/1/p/0653/062/052/2/w/1920/0653062052_6_1_1.jpg?ts=1648801496086"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
 
                                         <img
                                             src="https://static.zara.net/photos///2022/V/0/1/p/3920/025/800/2/w/1920/3920025800_6_1_1.jpg?ts=1641284562987"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
                                     </div>
@@ -82,13 +83,13 @@
                                     <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
                                         <img
                                             src="https://static.zara.net/photos///2021/I/0/2/p/6462/300/833/2/w/1920/6462300833_6_1_1.jpg?ts=1621523653208"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
 
                                         <img
                                             src="https://static.zara.net/photos///2021/I/0/2/p/0526/310/811/2/w/196/0526310811_6_1_1.jpg?ts=1623248590699"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
                                     </div>
@@ -112,19 +113,19 @@
                                     <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
                                         <img
                                             src="https://static.zara.net/photos///2022/V/0/1/p/6045/232/407/2/w/438/6045232407_6_1_1.jpg?ts=1641923321517"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
 
                                         <img
                                             src="https://static.zara.net/photos///2022/V/0/1/p/6164/063/406/2/w/1920/6164063406_6_1_1.jpg?ts=1642684506925"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
 
                                         <img
                                             src="https://static.zara.net/photos///2022/V/0/1/p/4365/264/441/2/w/1920/4365264441_6_1_1.jpg?ts=1649072196848"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
                                     </div>
@@ -148,13 +149,13 @@
                                     <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
                                         <img
                                             src="https://static.zara.net/photos///2022/I/1/2/p/2265/920/001/2/w/297/2265920001_6_1_1.jpg?ts=1658144340803"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
 
                                         <img
                                             src="https://static.zara.net/photos///2022/I/1/2/p/2266/920/009/2/w/297/2266920009_6_1_1.jpg?ts=1658144340693"
-                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
                                             alt="..."
                                         />
                                     </div>
