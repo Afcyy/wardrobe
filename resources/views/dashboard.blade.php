@@ -1,17 +1,17 @@
 <x-app-layout>
     <div class="w-screen">
-        <div class="mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg flex flex-row h-screen">
-                <div id="outfit" class="flex justify-center items-center p-6 border-b border-gray-200 w-1/3 h-screen">
-                    <div class="flex flex-col items-center">
+        <div class="flex justify-center items-center mx-auto sm:px-6 lg:px-8 h-screen">
+            <div class="overflow-hidden bg-white shadow-sm rounded-md sm:rounded-lg flex flex-row h-4/5 w-4/5">
+                <div id="outfit" class="flex justify-center items-center p-6 border-b border-gray-200 w-1/3 h-full">
+                    <div class="flex flex-col items-center justify-center">
                         {{-- Hat --}}
                         <div class="relative group">
-                            <img id="hats" class="bg-center w-32 h-32 bg-white my-1 object-scale-down"
+                            <img id="hats" class="w-32 h-32 bg-white my-1 object-scale-down"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                             <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-sm text-blue-500 cursor-default">Click to remove</p>
                         </div>
                         <div class="flex flex-row my-1">
-                            <div class="w-32 h-32 bg-white mx-1 text-gray-300">Accessory 1</div>
+                            <div class="bg-center w-32 h-32 bg-white mx-1 text-gray-300">Accessory 1</div>
                             {{-- Top --}}
                             <div class="relative group">
                                 <img id="tops" class="w-32 h-32 bg-white my-1 object-cover"
@@ -34,56 +34,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-auto p-6 w-2/3 h-2/3 overflow-y-auto">
+                <div class="w-2/3 h-full overflow-y-auto">
                     <div class="accordion accordion-flush" id="accordion">
-                        <div
-                            id="hats" class="accordion-item rounded-none">
-                            <h2 class="accordion-header mb-0" id="flush-headingHats">
-                                <button
-                                    class="accordion-button relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left border-0 rounded-none transition focus:outline-none"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#flush-hatsCollapse"
-                                    aria-expanded="false" aria-controls="flush-hatsCollapse">
-                                    Hats
-                                </button>
-                            </h2>
-                            <div id="flush-hatsCollapse" class="accordion-collapse border-0 collapse show"
-                                 aria-labelledby="flush-headingHats" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
-                                    <img
-                                        src="https://static.zara.net/photos///2022/V/0/1/p/3920/025/800/2/w/1920/3920025800_6_1_1.jpg?ts=1641284562987"
-                                        class="my-2 mx-2 p-1 bg-white border rounded h-56"
-                                        alt="..."
-                                    />
+                        <div class="accordion accordion-flush" id="hatsAccordion">
+                            <div
+                                id="hats" class="accordion-item rounded-none">
+                                <h2 class="accordion-header mb-0" id="flush-headingTops">
+                                    <button
+                                        class="accordion-button relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left border-0 rounded-none transition focus:outline-none"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#flush-hatsCollapse"
+                                        aria-expanded="false" aria-controls="flush-hatsCollapse">
+                                        Hats
+                                    </button>
+                                </h2>
+                                <div id="flush-hatsCollapse" class="accordion-collapse border-0 collapse show"
+                                     aria-labelledby="flush-headingHats" data-bs-parent="#accordionHats">
+                                    <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
+                                        <img
+                                            src="https://static.zara.net/photos///2022/V/0/1/p/0653/062/052/2/w/1920/0653062052_6_1_1.jpg?ts=1648801496086"
+                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            alt="..."
+                                        />
 
-                                    <img
-                                        src="https://static.zara.net/photos///2022/V/0/1/p/0653/062/052/2/w/1920/0653062052_6_1_1.jpg?ts=1648801496086"
-                                        class="my-2 mx-2 p-1 bg-white border rounded h-56"
-                                        alt="..."
-                                    />
-
-                                    <img
-                                        src="https://static.zara.net/photos///2022/V/0/1/p/0653/062/052/2/w/1920/0653062052_6_1_1.jpg?ts=1648801496086"
-                                        class="my-2 mx-2 p-1 bg-white border rounded h-56"
-                                        alt="..."
-                                    />
-
-                                    <img
-                                        src="https://static.zara.net/photos///2022/V/0/1/p/3920/025/800/2/w/1920/3920025800_6_1_1.jpg?ts=1641284562987"
-                                        class="my-2 mx-2 p-1 bg-white border rounded h-56"
-                                        alt="..."
-                                    />
-
-                                    <img
-                                        src="https://static.zara.net/photos///2022/V/0/1/p/0653/062/052/2/w/1920/0653062052_6_1_1.jpg?ts=1648801496086"
-                                        class="my-2 mx-2 p-1 bg-white border rounded h-56"
-                                        alt="..."
-                                    />
-
-                                    <img
-                                        src="https://static.zara.net/photos///2022/V/0/1/p/3920/025/800/2/w/1920/3920025800_6_1_1.jpg?ts=1641284562987"
-                                        class="my-2 mx-2 p-1 bg-white border rounded h-56"
-                                        alt="..."
-                                    />
+                                        <img
+                                            src="https://static.zara.net/photos///2022/V/0/1/p/3920/025/800/2/w/1920/3920025800_6_1_1.jpg?ts=1641284562987"
+                                            class="my-2 mx-2 p-1 bg-white border rounded h-56"
+                                            alt="..."
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
