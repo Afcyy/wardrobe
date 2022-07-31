@@ -5552,6 +5552,15 @@ function runListeners() {
   });
 }
 
+document.querySelector('#randomize').addEventListener('click', function () {
+  document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
+    var allImages = item.querySelectorAll('img');
+    var randomNum = Math.floor(Math.random() * allImages.length);
+    var randomImage = allImages.item(randomNum);
+    document.querySelector("#outfit #".concat(item.id)).src = randomImage.src;
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

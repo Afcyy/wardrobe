@@ -116,3 +116,13 @@ function runListeners(){
         item.parentElement.querySelector('p').addEventListener('dragover', dragover);
     });
 }
+
+document.querySelector('#randomize').addEventListener('click', () => {
+    document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
+        const allImages = item.querySelectorAll('img');
+        const randomNum = Math.floor(Math.random() * allImages.length);
+        const randomImage = allImages.item(randomNum);
+
+        document.querySelector(`#outfit #${item.id}`).src = randomImage.src;
+    })
+})

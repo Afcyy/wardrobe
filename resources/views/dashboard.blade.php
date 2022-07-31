@@ -5,6 +5,7 @@
                 <div id="outfit" class="flex justify-center items-center p-6 border-b border-gray-200 lg:w-2/4 w-full h-full">
                     <div class="flex flex-col items-center justify-center">
                         {{-- Hat --}}
+                        <p id="randomize" class="flex justify-center items-center text-sm text-blue-500 cursor-pointer mx-2">Randomize <i class="stroke-indigo-500 w-4 mx-1" data-feather="shuffle"></i></p>
                         <div class="relative group">
                             <img id="hats" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
@@ -34,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full sm:w-full h-full md:overflow-y-auto">
+                <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">
                     <div class="accordion accordion-flush" id="accordion">
                         <div class="accordion accordion-flush" id="hatsAccordion">
                             <p class="text-xl font-bold m-6 text-black">Wardrobe</p>
