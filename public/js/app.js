@@ -5527,7 +5527,7 @@ function fromOutfitToWardrobe(parent, image, id) {
   var wardrobePart = document.querySelector("#accordion #".concat(id, " .accordion-collapse .accordion-body"));
   var returnedPiece = document.createElement('img');
   returnedPiece.src = image.src;
-  returnedPiece.classList.add('my-2', 'mx-2', 'p-1', 'bg-white', 'border', 'rounded', 'h-56');
+  returnedPiece.classList.add('my-2', 'mx-2', 'p-1', 'bg-white', 'border', 'rounded', 'lg:h-44', 'h-32');
   returnedPiece.draggable = true;
   wardrobePart.appendChild(returnedPiece);
   image.src = defaultSrc;
