@@ -5557,7 +5557,14 @@ document.querySelector('#randomize').addEventListener('click', function () {
     var allImages = item.querySelectorAll('img');
     var randomNum = Math.floor(Math.random() * allImages.length);
     var randomImage = allImages.item(randomNum);
-    document.querySelector("#outfit #".concat(item.id)).src = randomImage.src;
+    var outfitPart = document.querySelector("#outfit #".concat(item.id));
+
+    if (outfitPart.src !== defaultSrc) {
+      fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
+    }
+
+    outfitPart.src = randomImage.src;
+    randomImage.remove();
   });
 });
 

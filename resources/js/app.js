@@ -123,6 +123,14 @@ document.querySelector('#randomize').addEventListener('click', () => {
         const randomNum = Math.floor(Math.random() * allImages.length);
         const randomImage = allImages.item(randomNum);
 
-        document.querySelector(`#outfit #${item.id}`).src = randomImage.src;
+        const outfitPart = document.querySelector(`#outfit #${item.id}`);
+
+        if(outfitPart.src !== defaultSrc){
+            fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
+        }
+
+        outfitPart.src = randomImage.src;
+
+        randomImage.remove();
     })
 })
