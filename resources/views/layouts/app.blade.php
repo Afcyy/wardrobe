@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <script src="https://unpkg.com/feather-icons"></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -31,6 +33,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
         <script>
             feather.replace()
         </script>

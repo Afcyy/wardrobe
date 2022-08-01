@@ -5451,7 +5451,56 @@ __webpack_require__.r(__webpack_exports__);
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 var defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII=";
-runListeners();
+
+if (window.location.href.includes('dashboard')) {
+  runListeners();
+  document.querySelector('#randomize').addEventListener('click', function () {
+    document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
+      var allImages = item.querySelectorAll('img');
+      var randomNum = Math.floor(Math.random() * allImages.length);
+      var randomImage = allImages.item(randomNum);
+      var outfitPart = document.querySelector("#outfit #".concat(item.id));
+
+      if (outfitPart.src !== defaultSrc) {
+        fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
+      }
+
+      outfitPart.src = randomImage.src;
+      toggleEquipped(outfitPart);
+      randomImage.remove();
+    });
+  });
+}
+
+if (window.location.href.includes('upload')) {
+  var createTag = function createTag(event) {
+    if (event.code === 'Enter') {
+      var input = listOfTags.querySelector('input');
+
+      if (input.value.trim() !== '') {
+        var li = document.createElement("li");
+        li.addEventListener('click', removeTag);
+        li.classList.add('mr-1', 'mt-2', 'bg-gray-200', 'rounded-md', 'px-4', 'py-2', 'flex', 'cursor-pointer', 'overflow-hidden');
+        li.appendChild(document.createTextNode(input.value));
+        var span = document.createElement("span");
+        span.classList.add('flex', 'items-center', 'justify-center', 'w-4', 'ml-2', 'hover:rounded-full', 'hover:rounded-full', 'hover:bg-gray-300');
+        span.appendChild(document.createTextNode('x'));
+        li.appendChild(span);
+        listOfTags.appendChild(li);
+        input.value = '';
+      }
+    }
+  };
+
+  var removeTag = function removeTag(event) {
+    if (event.target.parentElement.tagName === 'LI') {
+      event.target.parentElement.remove();
+    }
+  };
+
+  var listOfTags = document.querySelector('#upload #tags');
+  listOfTags.addEventListener('keyup', createTag);
+}
 
 function drag(ev) {
   ev.target.classList.add('opacity-20');
@@ -5549,23 +5598,6 @@ function runListeners() {
     item.parentElement.querySelector('p').addEventListener('dragover', dragover);
   });
 }
-
-document.querySelector('#randomize').addEventListener('click', function () {
-  document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
-    var allImages = item.querySelectorAll('img');
-    var randomNum = Math.floor(Math.random() * allImages.length);
-    var randomImage = allImages.item(randomNum);
-    var outfitPart = document.querySelector("#outfit #".concat(item.id));
-
-    if (outfitPart.src !== defaultSrc) {
-      fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
-    }
-
-    outfitPart.src = randomImage.src;
-    toggleEquipped(outfitPart);
-    randomImage.remove();
-  });
-});
 
 /***/ }),
 
