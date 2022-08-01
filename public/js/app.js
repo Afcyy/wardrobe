@@ -5441,10 +5441,23 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "defaultSrc": () => (/* binding */ defaultSrc),
+/* harmony export */   "getOutfitPart": () => (/* binding */ getOutfitPart),
+/* harmony export */   "runListeners": () => (/* binding */ runListeners)
+/* harmony export */ });
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 /* harmony import */ var tw_elements__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tw-elements */ "./node_modules/tw-elements/dist/js/index.min.js");
 /* harmony import */ var tw_elements__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(tw_elements__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _dragndrop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dragndrop */ "./resources/js/dragndrop.js");
+/* harmony import */ var _click_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./click-actions */ "./resources/js/click-actions.js");
+/* harmony import */ var _tags__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tags */ "./resources/js/tags.js");
+/* harmony import */ var _outfits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./outfits */ "./resources/js/outfits.js");
+
+
+
+
 
 
 
@@ -5454,148 +5467,28 @@ var defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAG
 
 if (window.location.href.includes('dashboard')) {
   runListeners();
-  document.querySelector('#randomize').addEventListener('click', function () {
-    document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
-      var allImages = item.querySelectorAll('img');
-      var randomNum = Math.floor(Math.random() * allImages.length);
-      var randomImage = allImages.item(randomNum);
-      var outfitPart = document.querySelector("#outfit #".concat(item.id));
-
-      if (outfitPart.src !== defaultSrc) {
-        fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
-      }
-
-      outfitPart.src = randomImage.src;
-      toggleEquipped(outfitPart);
-      randomImage.remove();
-    });
-  });
+  document.querySelector('#randomize').addEventListener('click', _outfits__WEBPACK_IMPORTED_MODULE_6__.createRandomOutfit);
 }
 
 if (window.location.href.includes('upload')) {
-  var createTag = function createTag(event) {
-    if (event.code === 'Enter') {
-      var input = listOfTags.querySelector('input');
-
-      if (input.value.trim() !== '') {
-        var li = document.createElement("li");
-        li.addEventListener('click', removeTag);
-        li.classList.add('mr-1', 'mt-2', 'bg-gray-200', 'rounded-md', 'px-4', 'py-2', 'flex', 'cursor-pointer', 'overflow-hidden');
-        li.appendChild(document.createTextNode(input.value));
-        var span = document.createElement("span");
-        span.classList.add('flex', 'items-center', 'justify-center', 'w-4', 'ml-2', 'hover:rounded-full', 'hover:rounded-full', 'hover:bg-gray-300');
-        span.appendChild(document.createTextNode('x'));
-        li.appendChild(span);
-        listOfTags.appendChild(li);
-        input.value = '';
-      }
-    }
-  };
-
-  var removeTag = function removeTag(event) {
-    if (event.target.parentElement.tagName === 'LI') {
-      event.target.parentElement.remove();
-    }
-  };
-
-  var listOfTags = document.querySelector('#upload #tags');
-  listOfTags.addEventListener('keyup', createTag);
+  document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
 }
 
-function drag(ev) {
-  ev.target.classList.add('opacity-20');
-  var parentId = ev.target.parentElement.parentElement.parentElement.id;
-  document.querySelector("#outfit #".concat(parentId)).classList.add('brightness-90');
-  ev.dataTransfer.effectAllowed = "move";
-  ev.dataTransfer.setDragImage(ev.target, ev.target.width / 2, ev.target.height / 2);
-  ev.dataTransfer.setData("src", ev.target.src);
-  ev.dataTransfer.setData("parent", parentId);
+function getOutfitPart(id) {
+  return document.querySelector("#outfit #".concat(id));
 }
-
-function dragover(ev) {
-  ev.preventDefault();
-}
-
-function dragend() {
-  this.classList.remove('opacity-20');
-  var parentId = this.parentElement.parentElement.parentElement.id;
-  var image = document.querySelector("#outfit #".concat(parentId));
-  image.classList.remove('brightness-90');
-
-  if (image.src === this.src) {
-    this.remove();
-  }
-}
-
-function drop(ev) {
-  ev.preventDefault();
-  var parentImg = ev.target.parentElement.querySelector('img');
-  ev.dataTransfer.dropEffect = "move";
-
-  if (ev.dataTransfer.getData("parent") === parentImg.id) {
-    if (parentImg.src !== defaultSrc) {
-      undoClick(ev);
-    }
-
-    parentImg.src = ev.dataTransfer.getData("src");
-    toggleEquipped(parentImg);
-  }
-}
-
-function click(ev) {
-  var targetSrc = ev.target.src;
-  var parentId = ev.target.parentElement.parentElement.parentElement.id;
-  var outfitPart = document.querySelector("#outfit #".concat(parentId));
-
-  if (outfitPart.src !== defaultSrc) {
-    fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
-  }
-
-  outfitPart.src = targetSrc;
-  toggleEquipped(outfitPart);
-  ev.target.remove();
-}
-
-function toggleEquipped(outfitPart) {
-  outfitPart.classList.toggle('group-hover:opacity-30');
-  outfitPart.parentNode.classList.add('cursor-pointer');
-  outfitPart.parentNode.querySelector('p').classList.toggle('group-hover:opacity-100');
-  outfitPart.parentNode.querySelector('p').classList.toggle('cursor-default');
-}
-
-function undoClick(ev) {
-  var parent = ev.target.parentNode;
-  var image = parent.querySelector('img');
-
-  if (image.src !== defaultSrc) {
-    fromOutfitToWardrobe(parent, image, image.id);
-  }
-}
-
-function fromOutfitToWardrobe(parent, image, id) {
-  var wardrobePart = document.querySelector("#accordion #".concat(id, " .accordion-collapse .accordion-body"));
-  var returnedPiece = document.createElement('img');
-  returnedPiece.src = image.src;
-  returnedPiece.classList.add('my-2', 'mx-2', 'p-1', 'bg-white', 'border', 'rounded', 'lg:h-44', 'h-32');
-  returnedPiece.draggable = true;
-  wardrobePart.appendChild(returnedPiece);
-  image.src = defaultSrc;
-  toggleEquipped(image);
-  runListeners();
-}
-
 function runListeners() {
   document.querySelectorAll('#accordion img').forEach(function (item) {
     item.classList.add('cursor-move');
     item.setAttribute('draggable', true);
-    item.addEventListener('click', click);
-    item.addEventListener('dragstart', drag);
-    item.addEventListener('dragend', dragend);
+    item.addEventListener('click', _click_actions__WEBPACK_IMPORTED_MODULE_4__.click);
+    item.addEventListener('dragstart', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.drag);
+    item.addEventListener('dragend', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.dragend);
   });
   document.querySelectorAll('#outfit img').forEach(function (item) {
-    item.parentElement.addEventListener('click', undoClick);
-    item.parentElement.addEventListener('drop', drop);
-    item.parentElement.querySelector('p').addEventListener('dragover', dragover);
+    item.parentElement.addEventListener('click', _click_actions__WEBPACK_IMPORTED_MODULE_4__.removeFromOutfit);
+    item.parentElement.addEventListener('drop', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.drop);
+    item.parentElement.querySelector('p').addEventListener('dragover', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.dragover);
   });
 }
 
@@ -5641,6 +5534,194 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+/***/ }),
+
+/***/ "./resources/js/click-actions.js":
+/*!***************************************!*\
+  !*** ./resources/js/click-actions.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "click": () => (/* binding */ click),
+/* harmony export */   "fromOutfitToWardrobe": () => (/* binding */ fromOutfitToWardrobe),
+/* harmony export */   "removeFromOutfit": () => (/* binding */ removeFromOutfit),
+/* harmony export */   "toggleEquipped": () => (/* binding */ toggleEquipped)
+/* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/app.js");
+
+function click(ev) {
+  var targetSrc = ev.target.src;
+  var parentId = ev.target.parentElement.parentElement.parentElement.id;
+  var outfitPart = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(parentId);
+
+  if (outfitPart.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+    fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
+  }
+
+  outfitPart.src = targetSrc;
+  toggleEquipped(outfitPart);
+  ev.target.remove();
+}
+function removeFromOutfit(ev) {
+  var parent = ev.target.parentNode;
+  var image = parent.querySelector('img');
+
+  if (image.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+    fromOutfitToWardrobe(parent, image, image.id);
+  }
+}
+function fromOutfitToWardrobe(parent, image, id) {
+  var wardrobePart = document.querySelector("#accordion #".concat(id, " .accordion-collapse .accordion-body"));
+  var returnedPiece = document.createElement('img');
+  returnedPiece.src = image.src;
+  returnedPiece.classList.add('my-2', 'mx-2', 'p-1', 'bg-white', 'border', 'rounded', 'lg:h-44', 'h-32');
+  returnedPiece.draggable = true;
+  wardrobePart.appendChild(returnedPiece);
+  image.src = _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc;
+  toggleEquipped(image);
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.runListeners)();
+}
+function toggleEquipped(outfitPart) {
+  outfitPart.classList.toggle('group-hover:opacity-30');
+  outfitPart.parentNode.classList.add('cursor-pointer');
+  outfitPart.parentNode.querySelector('p').classList.toggle('group-hover:opacity-100');
+  outfitPart.parentNode.querySelector('p').classList.toggle('cursor-default');
+}
+
+/***/ }),
+
+/***/ "./resources/js/dragndrop.js":
+/*!***********************************!*\
+  !*** ./resources/js/dragndrop.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "drag": () => (/* binding */ drag),
+/* harmony export */   "dragend": () => (/* binding */ dragend),
+/* harmony export */   "dragover": () => (/* binding */ dragover),
+/* harmony export */   "drop": () => (/* binding */ drop)
+/* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/app.js");
+/* harmony import */ var _click_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./click-actions */ "./resources/js/click-actions.js");
+
+
+function drag(ev) {
+  ev.target.classList.add('opacity-20');
+  var parentId = ev.target.parentElement.parentElement.parentElement.id;
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(parentId).classList.add('brightness-90');
+  ev.dataTransfer.effectAllowed = "move";
+  ev.dataTransfer.setDragImage(ev.target, ev.target.width / 2, ev.target.height / 2);
+  ev.dataTransfer.setData("src", ev.target.src);
+  ev.dataTransfer.setData("parent", parentId);
+}
+function dragover(ev) {
+  ev.preventDefault();
+}
+function dragend() {
+  this.classList.remove('opacity-20');
+  var parentId = this.parentElement.parentElement.parentElement.id;
+  var image = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(parentId);
+  image.classList.remove('brightness-90');
+
+  if (image.src === this.src) {
+    this.remove();
+  }
+}
+function drop(ev) {
+  ev.preventDefault();
+  var parentImg = ev.target.parentElement.querySelector('img');
+  ev.dataTransfer.dropEffect = "move";
+
+  if (ev.dataTransfer.getData("parent") === parentImg.id) {
+    if (parentImg.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+      (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.removeFromOutfit)(ev);
+    }
+
+    parentImg.src = ev.dataTransfer.getData("src");
+    (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.toggleEquipped)(parentImg);
+  }
+}
+
+/***/ }),
+
+/***/ "./resources/js/outfits.js":
+/*!*********************************!*\
+  !*** ./resources/js/outfits.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createRandomOutfit": () => (/* binding */ createRandomOutfit)
+/* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/app.js");
+/* harmony import */ var _click_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./click-actions */ "./resources/js/click-actions.js");
+
+
+function createRandomOutfit() {
+  document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
+    var allImages = item.querySelectorAll('img');
+    var randomNum = Math.floor(Math.random() * allImages.length);
+    var randomImage = allImages.item(randomNum);
+    var outfitPart = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(item.id);
+
+    if (outfitPart.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+      (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.fromOutfitToWardrobe)(outfitPart.parentElement, outfitPart, outfitPart.id);
+    }
+
+    outfitPart.src = randomImage.src;
+    (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.toggleEquipped)(outfitPart);
+    randomImage.remove();
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/tags.js":
+/*!******************************!*\
+  !*** ./resources/js/tags.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createTag": () => (/* binding */ createTag),
+/* harmony export */   "removeTag": () => (/* binding */ removeTag)
+/* harmony export */ });
+function createTag(event) {
+  var listOfTags = document.querySelector('#upload #tags');
+
+  if (event.code === 'Enter') {
+    var input = listOfTags.querySelector('input');
+
+    if (input.value.trim() !== '') {
+      var li = document.createElement("li");
+      li.addEventListener('click', removeTag);
+      li.classList.add('mr-1', 'mt-2', 'bg-gray-200', 'rounded-md', 'px-4', 'py-2', 'flex', 'cursor-pointer', 'overflow-hidden');
+      li.appendChild(document.createTextNode(input.value));
+      var span = document.createElement("span");
+      span.classList.add('flex', 'items-center', 'justify-center', 'w-4', 'ml-2', 'hover:rounded-full', 'hover:rounded-full', 'hover:bg-gray-300');
+      span.appendChild(document.createTextNode('x'));
+      li.appendChild(span);
+      listOfTags.appendChild(li);
+      input.value = '';
+    }
+  }
+}
+function removeTag(event) {
+  if (event.target.parentElement.tagName === 'LI') {
+    event.target.parentElement.remove();
+  }
+}
 
 /***/ }),
 
