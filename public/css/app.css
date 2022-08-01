@@ -4553,6 +4553,19 @@ textarea.form-control.is-invalid {
   opacity: 0.25;
 }
 
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.group:hover .group-hover\:opacity-30 {
+  opacity: 0.3;
+}
+
+.group:hover .group-hover\:brightness-90 {
+  --tw-brightness: brightness(.9);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 @media (prefers-color-scheme: dark) {
 
   .dark\:border-gray-700 {

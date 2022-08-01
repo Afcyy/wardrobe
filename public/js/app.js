@@ -5489,7 +5489,7 @@ function drop(ev) {
     }
 
     parentImg.src = ev.dataTransfer.getData("src");
-    makeRemovable(parentImg);
+    toggleEquipped(parentImg);
   }
 }
 
@@ -5503,15 +5503,15 @@ function click(ev) {
   }
 
   outfitPart.src = targetSrc;
-  makeRemovable(outfitPart);
+  toggleEquipped(outfitPart);
   ev.target.remove();
 }
 
-function makeRemovable(outfitPart) {
-  outfitPart.classList.add('group-hover:opacity-30');
+function toggleEquipped(outfitPart) {
+  outfitPart.classList.toggle('group-hover:opacity-30');
   outfitPart.parentNode.classList.add('cursor-pointer');
-  outfitPart.parentNode.querySelector('p').classList.add('group-hover:opacity-100');
-  outfitPart.parentNode.querySelector('p').classList.remove('cursor-default');
+  outfitPart.parentNode.querySelector('p').classList.toggle('group-hover:opacity-100');
+  outfitPart.parentNode.querySelector('p').classList.toggle('cursor-default');
 }
 
 function undoClick(ev) {
@@ -5531,9 +5531,7 @@ function fromOutfitToWardrobe(parent, image, id) {
   returnedPiece.draggable = true;
   wardrobePart.appendChild(returnedPiece);
   image.src = defaultSrc;
-  image.classList.remove('group-hover:opacity-30');
-  parent.querySelector('p').classList.remove('group-hover:opacity-100');
-  parent.querySelector('p').classList.add('cursor-default');
+  toggleEquipped(image);
   runListeners();
 }
 
@@ -5564,6 +5562,7 @@ document.querySelector('#randomize').addEventListener('click', function () {
     }
 
     outfitPart.src = randomImage.src;
+    toggleEquipped(outfitPart);
     randomImage.remove();
   });
 });
