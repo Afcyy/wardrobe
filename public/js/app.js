@@ -5465,13 +5465,11 @@ window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 var defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII=";
 
-if (window.location.href.includes('dashboard')) {
+if (window.location.href.includes('create')) {
+  document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
+} else if (window.location.href.includes('outfit')) {
   runListeners();
   document.querySelector('#randomize').addEventListener('click', _outfits__WEBPACK_IMPORTED_MODULE_6__.createRandomOutfit);
-}
-
-if (window.location.href.includes('upload')) {
-  document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
 }
 
 function getOutfitPart(id) {
@@ -5668,6 +5666,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function createRandomOutfit() {
   document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
+    if (item.id === 'header') return;
     var allImages = item.querySelectorAll('img');
     var randomNum = Math.floor(Math.random() * allImages.length);
     var randomImage = allImages.item(randomNum);
