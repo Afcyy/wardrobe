@@ -38,7 +38,10 @@
                 <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">
                     <div class="accordion accordion-flush" id="accordion">
                         <div class="accordion accordion-flush" id="hatsAccordion">
-                            <p class="text-xl font-bold m-6 text-black">Wardrobe</p>
+                            <div class="flex items-center justify-between m-6">
+                                <p class="text-xl font-bold text-black">Wardrobe</p>
+                                <a href="{{ route('upload') }}" class="bg-blue-500 text-white text-sm rounded-md py-2 px-4">Add new</a>
+                            </div>
                             <div
                                 id="hats" class="accordion-item rounded-none">
                                 <h2 class="accordion-header mb-0" id="flush-headingTops">
