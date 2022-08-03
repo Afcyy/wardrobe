@@ -4,6 +4,8 @@ import {toggleEquipped, removeFromOutfit, fromOutfitToWardrobe} from "./click-ac
 export function createRandomOutfit()
 {
     document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
+        if(item.id === 'header') return;
+
         const allImages = item.querySelectorAll('img');
         const randomNum = Math.floor(Math.random() * allImages.length);
         const randomImage = allImages.item(randomNum);

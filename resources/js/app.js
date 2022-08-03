@@ -11,14 +11,13 @@ Alpine.start();
 
 export const defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="
 
-if(window.location.href.includes('dashboard')){
+
+if(window.location.href.includes('create')){
+    document.querySelector('#upload #tags').addEventListener('keyup', createTag);
+} else if(window.location.href.includes('outfit')){
     runListeners();
 
     document.querySelector('#randomize').addEventListener('click', createRandomOutfit)
-}
-
-if(window.location.href.includes('upload')){
-    document.querySelector('#upload #tags').addEventListener('keyup', createTag);
 }
 
 export function getOutfitPart(id){
