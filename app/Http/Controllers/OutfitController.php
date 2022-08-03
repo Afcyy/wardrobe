@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOutfitRequest;
+use App\Models\Outfit;
+use App\Models\Season;
+use Hoa\Stream\IStream\Out;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OutfitController extends Controller
@@ -24,18 +29,28 @@ class OutfitController extends Controller
      */
     public function create(): View
     {
-        return view('upload');
+        $seasons = Season::all();
+
+        return view('upload', compact('seasons'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return void
+     * @param StoreOutfitRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreOutfitRequest $request): RedirectResponse
     {
-        //
+        $outfit = Outfit::create([
+            'category' => $request->get('category'),
+            'tags' => explode(',', $request->get('tags'))
+        ]);
+
+        $outfit->seasons()->attach($request->get('season'));
+        $outfit->addMediaFromRequest('image')->toMediaCollection('outfits');
+
+        return back()->with('success', 'Item was added successfully');
     }
 
     /**
