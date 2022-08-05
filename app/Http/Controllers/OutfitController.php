@@ -19,7 +19,11 @@ class OutfitController extends Controller
      */
     public function index(): View
     {
-        return view('dashboard');
+        $outfits = Outfit::with(['seasons', 'tags'])
+            ->get()
+            ->groupBy('category');
+
+        return view('dashboard', compact('outfits'));
     }
 
     /**
