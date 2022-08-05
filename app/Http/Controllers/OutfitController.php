@@ -19,7 +19,13 @@ class OutfitController extends Controller
      */
     public function index(): View
     {
-        return view('dashboard');
+        $outfits = auth()->user()
+            ->outfits()
+            ->with(['seasons', 'tags'])
+            ->get()
+            ->groupBy('category');
+
+        return view('dashboard', compact('outfits'));
     }
 
     /**
@@ -42,7 +48,7 @@ class OutfitController extends Controller
      */
     public function store(StoreOutfitRequest $request): RedirectResponse
     {
-        $outfit = Outfit::create([
+        $outfit = auth()->user()->outfits()->create([
             'category' => $request->get('category'),
             'tags' => explode(',', $request->get('tags'))
         ]);

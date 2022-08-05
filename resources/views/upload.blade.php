@@ -22,7 +22,7 @@
                 <div class="mb-6 w-2/4 h-auto">
                     <label for="tags" class="mb-4 text-sm font-medium text-gray-900">Category</label>
                     <select name="category" id="categories" class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option selected>Choose a category</option>
+                        <option selected disabled>Choose a category</option>
                         <option value="hats">Hats</option>
                         <option value="tops">Tops</option>
                         <option value="bottoms">Bottoms</option>
