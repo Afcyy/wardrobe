@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap">
 
         <!-- Scripts -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -17,20 +17,24 @@
         <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
 
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-{{--            @include('layouts.navigation')--}}
+    <body class="font-satoshi antialiased">
+        <div class="h-screen bg-gray-100">
 
-            <!-- Page Heading -->
-{{--            <header class="bg-white shadow">--}}
-{{--                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">--}}
-{{--                    {{ $header }}--}}
-{{--                </div>--}}
-{{--            </header>--}}
+            <header class="flex flex-row py-4 w-11/12 sm:flex-col break-words absolute left-1/2 transform -translate-x-1/2">
+                <div class="w-full flex justify-between items-center">
+                    <a href="{{ route('outfit.index') }}"><h1 class="text-xl text-blue-500 font-bold">Peacedrobe</h1></a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit" class="bg-red-500 text-white text-sm rounded-md py-2 px-4 hover:bg-red-400">Log out</button>
+                    </form>
+                </div>
+            </header>
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="w-full h-full">
+                <div class="flex justify-center items-center mx-auto sm:px-6 lg:px-8 h-screen">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
 
