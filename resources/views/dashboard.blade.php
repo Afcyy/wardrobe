@@ -1,7 +1,7 @@
 <x-app-layout>
     <div
         class="md:overflow-hidden overflow-y-auto bg-white shadow-sm rounded-md sm:rounded-lg flex md:flex-row flex-col md:justify-center items-center h-4/5 w-11/12">
-        @if(!$outfits->isEmpty())
+        @if(!$clothes->isEmpty())
             <div id="outfit"
                  class="flex justify-center items-center p-6 border-b border-gray-200 lg:w-2/4 w-full h-full">
                 <div class="flex flex-col items-center justify-center">
@@ -49,7 +49,7 @@
                        class="bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400">Add new</a>
                 </div>
                 <div class="accordion accordion-flush" id="accordion">
-                    @foreach($outfits as $category => $outfit)
+                    @foreach($clothes as $category => $clothing)
                         <div class="accordion accordion-flush" id="{{ $category . 'Accordion' }}">
                             <div
                                 id="{{ $category }}" class="accordion-item rounded-none">
@@ -67,7 +67,7 @@
                                      aria-labelledby="{{ 'flush-heading' . ucfirst($category) }}"
                                      data-bs-parent="{{ '#accordion' . ucfirst($category) }}">
                                     <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
-                                        @foreach($outfit as $item)
+                                        @foreach($clothing as $item)
                                             <img
                                                 src="{{ $item->getFirstMediaUrl('outfits') }}"
                                                 class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
