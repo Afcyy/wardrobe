@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\OutfitController;
+use App\Http\Controllers\ClothingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('outfit', OutfitController::class)->middleware('auth');
+Route::resource('outfit', ClothingController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

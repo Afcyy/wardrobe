@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('outfits', function (Blueprint $table) {
+        Schema::create('clothing_seasons', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
-            $table->foreignId('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreignId('clothing_id');
+            $table->foreignId('season_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('outfits');
+        Schema::dropIfExists('outfit_seasons');
     }
 };

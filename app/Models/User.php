@@ -45,6 +45,6 @@ class User extends Authenticatable
 
     public function outfits(): HasMany
     {
-        return $this->HasMany(Outfit::class);
+        return $this->HasMany(Clothing::class);
     }
 }

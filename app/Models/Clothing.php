@@ -12,7 +12,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
-class Outfit extends Model implements HasMedia
+class Clothing extends Model implements HasMedia
 {
     use HasFactory, HasTags, InteractsWithMedia;
 
@@ -22,7 +22,7 @@ class Outfit extends Model implements HasMedia
 
     public function seasons(): BelongsToMany
     {
-        return $this->belongsToMany(Season::class, 'outfit_seasons')->withTimestamps();
+        return $this->belongsToMany(Season::class, 'clothing_seasons')->withTimestamps();
     }
 
     /**

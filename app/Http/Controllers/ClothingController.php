@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOutfitRequest;
-use App\Models\Outfit;
+use App\Models\Clothing;
 use App\Models\Season;
 use Hoa\Stream\IStream\Out;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class OutfitController extends Controller
+class ClothingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +19,13 @@ class OutfitController extends Controller
      */
     public function index(): View
     {
-        $outfits = auth()->user()
+        $clothes = auth()->user()
             ->outfits()
             ->with(['seasons', 'tags'])
             ->get()
             ->groupBy('category');
 
-        return view('dashboard', compact('outfits'));
+        return view('dashboard', compact('clothes'));
     }
 
     /**
