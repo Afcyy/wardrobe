@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('outfit', OutfitController::class);
+Route::resource('outfit', OutfitController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
