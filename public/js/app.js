@@ -5668,17 +5668,20 @@ function createRandomOutfit() {
   document.querySelectorAll('.accordion .accordion-flush > div').forEach(function (item) {
     if (item.id === 'header') return;
     var allImages = item.querySelectorAll('img');
-    var randomNum = Math.floor(Math.random() * allImages.length);
-    var randomImage = allImages.item(randomNum);
-    var outfitPart = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(item.id);
 
-    if (outfitPart.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
-      (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.fromOutfitToWardrobe)(outfitPart.parentElement, outfitPart, outfitPart.id);
+    if (allImages.length) {
+      var randomNum = Math.floor(Math.random() * allImages.length);
+      var randomImage = allImages.item(randomNum);
+      var outfitPart = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(item.id);
+
+      if (outfitPart.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+        (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.fromOutfitToWardrobe)(outfitPart.parentElement, outfitPart, outfitPart.id);
+      }
+
+      outfitPart.src = randomImage.src;
+      (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.toggleEquipped)(outfitPart);
+      randomImage.remove();
     }
-
-    outfitPart.src = randomImage.src;
-    (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.toggleEquipped)(outfitPart);
-    randomImage.remove();
   });
 }
 
