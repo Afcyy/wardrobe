@@ -25,10 +25,9 @@
                 <select name="category" id="categories"
                         class="mt-1 bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option selected disabled>Choose a category</option>
-                    <option value="hats">Hats</option>
-                    <option value="tops">Tops</option>
-                    <option value="bottoms">Bottoms</option>
-                    <option value="shoes">Shoes</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ ucfirst($category->name) }}</option>
+                    @endforeach
                 </select>
             </div>
 
