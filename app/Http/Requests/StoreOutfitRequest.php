@@ -27,7 +27,7 @@ class StoreOutfitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category' => 'required|in:hats,tops,bottoms,shoes',
+            'category' => 'required|exists:categories,id',
             'season' => 'required|exists:seasons,id',
             'tags' => 'required|string',
             'image' => 'required|mimes:jpg,jpeg,png'
