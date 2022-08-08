@@ -7,7 +7,7 @@
                 <div class="flex flex-col items-center justify-center">
                     {{-- Hat --}}
                     <p id="randomize"
-                       class="flex justify-center items-center text-sm text-blue-500 cursor-pointer mx-2">Randomize <i
+                       class="flex justify-center items-center text-sm text-blue-500 cursor-pointer mx-2">Randomize<i
                             class="stroke-indigo-500 w-4 mx-1" data-feather="shuffle"></i></p>
                     <div class="relative group">
                         <img id="hats" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
@@ -39,6 +39,10 @@
                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                         <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                             Click to remove</p>
+                    </div>
+                    <div class="relative group mt-4">
+                        <button class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
+                        <button class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
                     </div>
                 </div>
             </div>
