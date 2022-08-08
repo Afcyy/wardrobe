@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\Image\Manipulations;
@@ -23,6 +24,11 @@ class Clothing extends Model implements HasMedia
     public function seasons(): BelongsToMany
     {
         return $this->belongsToMany(Season::class, 'clothing_seasons')->withTimestamps();
+    }
+
+    public function categories(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**
