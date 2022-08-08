@@ -18,7 +18,7 @@ class Clothing extends Model implements HasMedia
     use HasFactory, HasTags, InteractsWithMedia;
 
     protected $fillable = [
-        'category', 'tags'
+        'category_id', 'tags'
     ];
 
     public function seasons(): BelongsToMany
@@ -26,7 +26,7 @@ class Clothing extends Model implements HasMedia
         return $this->belongsToMany(Season::class, 'clothing_seasons')->withTimestamps();
     }
 
-    public function categories(): BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
