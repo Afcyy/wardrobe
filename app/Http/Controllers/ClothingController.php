@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOutfitRequest;
-use App\Models\Clothing;
+use App\Models\Category;
 use App\Models\Season;
-use Hoa\Stream\IStream\Out;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,9 +20,10 @@ class ClothingController extends Controller
     {
         $clothes = auth()->user()
             ->outfits()
-            ->with(['seasons', 'tags'])
+            ->with(['seasons', 'tags', 'category'])
             ->get()
-            ->groupBy('category');
+            ->sortBy('category_id')
+            ->groupBy('category.name');
 
         return view('dashboard', compact('clothes'));
     }
@@ -36,8 +36,9 @@ class ClothingController extends Controller
     public function create(): View
     {
         $seasons = Season::all();
+        $categories = Category::all();
 
-        return view('upload', compact('seasons'));
+        return view('upload', compact('seasons', 'categories'));
     }
 
     /**
@@ -49,7 +50,7 @@ class ClothingController extends Controller
     public function store(StoreOutfitRequest $request): RedirectResponse
     {
         $outfit = auth()->user()->outfits()->create([
-            'category' => $request->get('category'),
+            'category_id' => $request->get('category'),
             'tags' => explode(',', $request->get('tags'))
         ]);
 
