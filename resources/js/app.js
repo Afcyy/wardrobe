@@ -2,7 +2,7 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import 'tw-elements';
 import {drag, dragend, dragover, drop} from "./dragndrop";
-import {fromOutfitToWardrobe, removeFromOutfit, toggleEquipped, click} from "./click-actions";
+import {removeFromOutfit, click} from "./click-actions";
 import {createTag} from "./tags";
 import {createRandomOutfit} from "./outfits";
 
@@ -10,7 +10,6 @@ window.Alpine = Alpine;
 Alpine.start();
 
 export const defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="
-
 
 if(window.location.href.includes('create')){
     document.querySelector('#upload #tags').addEventListener('keyup', createTag);
@@ -40,4 +39,13 @@ export function runListeners(){
         item.parentElement.addEventListener('drop', drop);
         item.parentElement.querySelector('p').addEventListener('dragover', dragover);
     });
+}
+
+export function showActions(value = true) {
+    const outfitImages = [...document.querySelectorAll('.accordion .accordion-flush > div img')].map((item) => {return item.src !== defaultSrc});
+
+    if(outfitImages.length === 3 && !outfitImages.includes(false)) {
+        if(value) document.querySelector("#actions").classList.add('opacity-100');
+        else document.querySelector("#actions").classList.remove('opacity-100');
+    }
 }

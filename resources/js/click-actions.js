@@ -1,4 +1,4 @@
-import {defaultSrc, getOutfitPart, runListeners} from "./app";
+import {defaultSrc, getOutfitPart, runListeners, showActions} from "./app";
 
 export function click(ev) {
     const targetSrc = ev.target.src;
@@ -21,6 +21,7 @@ export function removeFromOutfit(ev) {
 
     if(image.src !== defaultSrc){
         fromOutfitToWardrobe(parent, image, image.id);
+        showActions(false)
     }
 }
 
@@ -43,4 +44,6 @@ export function toggleEquipped(outfitPart){
     outfitPart.parentNode.classList.add('cursor-pointer');
     outfitPart.parentNode.querySelector('p').classList.toggle('group-hover:opacity-100');
     outfitPart.parentNode.querySelector('p').classList.toggle('cursor-default');
+
+    showActions();
 }
