@@ -40,10 +40,11 @@
                         <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                             Click to remove</p>
                     </div>
-                    <div id="actions" class="relative group mt-4 opacity-0">
-                        <button class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
-                        <button class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
-                    </div>
+                    <form method="post" action="{{ route('save-outfit') }}" id="actions" class="relative group mt-4 opacity-0">
+                        {{ csrf_field() }}
+                        <button type="button" id="save" class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
+                        <button type="button" class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
+                    </form>
                 </div>
             </div>
             <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">
