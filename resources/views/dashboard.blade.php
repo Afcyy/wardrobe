@@ -7,7 +7,7 @@
                 <div class="flex flex-col items-center justify-center">
                     {{-- Hat --}}
                     <p id="randomize"
-                       class="flex justify-center items-center text-sm text-blue-500 cursor-pointer mx-2">Randomize <i
+                       class="flex justify-center items-center text-sm text-blue-500 cursor-pointer mx-2">Randomize<i
                             class="stroke-indigo-500 w-4 mx-1" data-feather="shuffle"></i></p>
                     <div class="relative group">
                         <img id="hats" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
@@ -40,6 +40,11 @@
                         <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                             Click to remove</p>
                     </div>
+                    <form method="post" action="{{ route('save-outfit') }}" id="actions" class="relative group mt-4 opacity-0">
+                        {{ csrf_field() }}
+                        <button type="button" id="save" class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
+                        <button type="button" id="clear" class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
+                    </form>
                 </div>
             </div>
             <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">

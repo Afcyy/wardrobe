@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClothingController;
+use App\Http\Controllers\OutfitsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('outfit', ClothingController::class)->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::resource('outfit', ClothingController::class);
+    Route::post('save-outfit', [OutfitsController::class, 'store'])->name('save-outfit');
+});
 
 require __DIR__.'/auth.php';
