@@ -1,4 +1,4 @@
-import {defaultSrc} from "./app";
+import {defaultSrc, showActions} from "./app";
 import {fromOutfitToWardrobe} from "./click-actions";
 
 export function saveOutfit(e) {
@@ -14,7 +14,7 @@ export function saveOutfit(e) {
             'X-CSRF-TOKEN': document.getElementsByName('_token')[0].value
         },
         body: JSON.stringify(obj)
-    });
+    }).then(r => clearOutfit());
 }
 
 export function clearOutfit(e){
@@ -23,4 +23,6 @@ export function clearOutfit(e){
             fromOutfitToWardrobe(item.parentElement, item, item.id);
         }
     });
+
+    showActions(false);
 }
