@@ -19,7 +19,7 @@ class ClothingController extends Controller
     public function index(): View
     {
         $clothes = auth()->user()
-            ->outfits()
+            ->clothings()
             ->with(['seasons', 'tags', 'category'])
             ->get()
             ->sortBy('category_id')
@@ -49,7 +49,7 @@ class ClothingController extends Controller
      */
     public function store(StoreOutfitRequest $request): RedirectResponse
     {
-        $outfit = auth()->user()->outfits()->create([
+        $outfit = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
             'tags' => explode(',', $request->get('tags'))
         ]);
