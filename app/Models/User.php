@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function outfits(): HasMany
     {
-        return $this->HasMany(Clothing::class);
+        return $this->HasMany(Outfit::class);
     }
 }
