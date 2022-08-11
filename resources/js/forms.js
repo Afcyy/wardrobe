@@ -1,3 +1,6 @@
+import {defaultSrc} from "./app";
+import {fromOutfitToWardrobe} from "./click-actions";
+
 export function saveOutfit(e) {
     const obj = {};
     document.querySelectorAll('#outfit > div img').forEach((item) => {
@@ -11,5 +14,13 @@ export function saveOutfit(e) {
             'X-CSRF-TOKEN': document.getElementsByName('_token')[0].value
         },
         body: JSON.stringify(obj)
+    });
+}
+
+export function clearOutfit(e){
+    document.querySelectorAll('#outfit > div img').forEach(function (item) {
+        if(item.src !== defaultSrc) {
+            fromOutfitToWardrobe(item.parentElement, item, item.id);
+        }
     });
 }

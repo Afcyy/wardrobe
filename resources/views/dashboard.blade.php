@@ -43,7 +43,7 @@
                     <form method="post" action="{{ route('save-outfit') }}" id="actions" class="relative group mt-4 opacity-0">
                         {{ csrf_field() }}
                         <button type="button" id="save" class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
-                        <button type="button" class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
+                        <button type="button" id="clear" class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
                     </form>
                 </div>
             </div>
