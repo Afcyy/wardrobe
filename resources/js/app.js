@@ -5,6 +5,7 @@ import {drag, dragend, dragover, drop} from "./dragndrop";
 import {removeFromOutfit, click} from "./click-actions";
 import {createTag} from "./tags";
 import {createRandomOutfit} from "./outfits";
+import {saveOutfit} from "./forms";
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -40,6 +41,8 @@ export function runListeners(){
         item.parentElement.querySelector('p').addEventListener('dragover', dragover);
     });
 }
+
+document.querySelector("#save").addEventListener('click', saveOutfit);
 
 export function showActions(value = true) {
     const outfitImages = [...document.querySelectorAll('.accordion .accordion-flush > div img')].map((item) => {return item.src !== defaultSrc});
