@@ -32,6 +32,22 @@
 
             <!-- Page Content -->
             <main class="w-full h-full">
+                <div id="successAlert"
+                     class="bg-green-400 rounded-md w-fit absolute top-5 right-10 border border-green-700
+                     @if(session()->has('success')) visible @else invisible @endif">
+                    <p class="text-white px-6 py-2">{{ session()->pull('success') }}</p>
+                </div>
+                @if(session()->has('error'))
+                    <div class="bg-red-500 rounded-md w-fit absolute top-5 right-10 border-2 border-red-700">
+                        <p class="text-white px-6 pt-2">Please fix errors below:</p>
+                        <ul class="list-disc py-2">
+                            @foreach(array_values(session()->pull('error')) as $error)
+                                <li class="text-white text-sm mx-14 py-2">{{ $error[0] }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="flex justify-center items-center mx-auto sm:px-6 lg:px-8 h-screen">
                     {{ $slot }}
                 </div>
@@ -40,7 +56,9 @@
 
         <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
         <script>
-            feather.replace()
+            feather.replace();
+
+            setTimeout("document.getElementById('successAlert').classList.add('invisible')", 5000);
         </script>
     </body>
 </html>

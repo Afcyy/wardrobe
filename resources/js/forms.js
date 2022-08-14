@@ -1,28 +1,28 @@
-import {defaultSrc, showActions} from "./app";
+import {baseUrl, defaultSrc, outfit, showActions} from "./app";
 import {fromOutfitToWardrobe} from "./click-actions";
 
 export function saveOutfit(e) {
     const obj = {};
-    document.querySelectorAll('#outfit > div img').forEach((item) => {
+    outfit.forEach((item) => {
         obj[item.id] = item.src;
     })
 
-    fetch("http://wardrobe.test/save-outfit", {
+    fetch(baseUrl + "/save-outfit", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.getElementsByName('_token')[0].value
         },
         body: JSON.stringify(obj)
-    }).then(r => clearOutfit());
+    }).then(r => window.location.reload());
 }
 
 export function clearOutfit(e){
-    document.querySelectorAll('#outfit > div img').forEach(function (item) {
+    outfit.forEach(function (item) {
         if(item.src !== defaultSrc) {
             fromOutfitToWardrobe(item.parentElement, item, item.id);
         }
     });
 
-    showActions(false);
+    showActions();
 }

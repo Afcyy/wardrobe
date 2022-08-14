@@ -5442,9 +5442,12 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "baseUrl": () => (/* binding */ baseUrl),
 /* harmony export */   "defaultSrc": () => (/* binding */ defaultSrc),
 /* harmony export */   "getOutfitPart": () => (/* binding */ getOutfitPart),
-/* harmony export */   "runListeners": () => (/* binding */ runListeners)
+/* harmony export */   "outfit": () => (/* binding */ outfit),
+/* harmony export */   "runListeners": () => (/* binding */ runListeners),
+/* harmony export */   "showActions": () => (/* binding */ showActions)
 /* harmony export */ });
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
@@ -5454,6 +5457,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _click_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./click-actions */ "./resources/js/click-actions.js");
 /* harmony import */ var _tags__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tags */ "./resources/js/tags.js");
 /* harmony import */ var _outfits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./outfits */ "./resources/js/outfits.js");
+/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./forms */ "./resources/js/forms.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 
 
@@ -5463,13 +5480,17 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
+var baseUrl = 'http://wardrobe.test';
 var defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII=";
+var outfit = document.querySelectorAll('#outfit > div img');
 
 if (window.location.href.includes('create')) {
   document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
 } else if (window.location.href.includes('outfit')) {
   runListeners();
   document.querySelector('#randomize').addEventListener('click', _outfits__WEBPACK_IMPORTED_MODULE_6__.createRandomOutfit);
+  document.querySelector("#save").addEventListener('click', _forms__WEBPACK_IMPORTED_MODULE_7__.saveOutfit);
+  document.querySelector("#clear").addEventListener('click', _forms__WEBPACK_IMPORTED_MODULE_7__.clearOutfit);
 }
 
 function getOutfitPart(id) {
@@ -5488,6 +5509,14 @@ function runListeners() {
     item.parentElement.addEventListener('drop', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.drop);
     item.parentElement.querySelector('p').addEventListener('dragover', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.dragover);
   });
+}
+function showActions() {
+  var outfitImages = _toConsumableArray(outfit).map(function (item) {
+    return item.src !== defaultSrc;
+  });
+
+  var actions = document.querySelector("#actions");
+  if (outfitImages.includes(true)) actions.classList.add('opacity-100');else actions.classList.remove('opacity-100');
 }
 
 /***/ }),
@@ -5570,6 +5599,7 @@ function removeFromOutfit(ev) {
 
   if (image.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
     fromOutfitToWardrobe(parent, image, image.id);
+    (0,_app__WEBPACK_IMPORTED_MODULE_0__.showActions)();
   }
 }
 function fromOutfitToWardrobe(parent, image, id) {
@@ -5588,6 +5618,7 @@ function toggleEquipped(outfitPart) {
   outfitPart.parentNode.classList.add('cursor-pointer');
   outfitPart.parentNode.querySelector('p').classList.toggle('group-hover:opacity-100');
   outfitPart.parentNode.querySelector('p').classList.toggle('cursor-default');
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.showActions)();
 }
 
 /***/ }),
@@ -5645,6 +5676,49 @@ function drop(ev) {
     parentImg.src = ev.dataTransfer.getData("src");
     (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.toggleEquipped)(parentImg);
   }
+}
+
+/***/ }),
+
+/***/ "./resources/js/forms.js":
+/*!*******************************!*\
+  !*** ./resources/js/forms.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "clearOutfit": () => (/* binding */ clearOutfit),
+/* harmony export */   "saveOutfit": () => (/* binding */ saveOutfit)
+/* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/app.js");
+/* harmony import */ var _click_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./click-actions */ "./resources/js/click-actions.js");
+
+
+function saveOutfit(e) {
+  var obj = {};
+  _app__WEBPACK_IMPORTED_MODULE_0__.outfit.forEach(function (item) {
+    obj[item.id] = item.src;
+  });
+  fetch(_app__WEBPACK_IMPORTED_MODULE_0__.baseUrl + "/save-outfit", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': document.getElementsByName('_token')[0].value
+    },
+    body: JSON.stringify(obj)
+  }).then(function (r) {
+    return window.location.reload();
+  });
+}
+function clearOutfit(e) {
+  _app__WEBPACK_IMPORTED_MODULE_0__.outfit.forEach(function (item) {
+    if (item.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+      (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.fromOutfitToWardrobe)(item.parentElement, item, item.id);
+    }
+  });
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.showActions)();
 }
 
 /***/ }),

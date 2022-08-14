@@ -21,7 +21,7 @@ export function removeFromOutfit(ev) {
 
     if(image.src !== defaultSrc){
         fromOutfitToWardrobe(parent, image, image.id);
-        showActions(false)
+        showActions();
     }
 }
 

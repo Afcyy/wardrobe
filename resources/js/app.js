@@ -10,7 +10,9 @@ import {clearOutfit, saveOutfit} from "./forms";
 window.Alpine = Alpine;
 Alpine.start();
 
+export const baseUrl = 'http://wardrobe.test';
 export const defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="
+export const outfit = document.querySelectorAll('#outfit > div img');
 
 if(window.location.href.includes('create')){
     document.querySelector('#upload #tags').addEventListener('keyup', createTag);
@@ -18,6 +20,8 @@ if(window.location.href.includes('create')){
     runListeners();
 
     document.querySelector('#randomize').addEventListener('click', createRandomOutfit)
+    document.querySelector("#save").addEventListener('click', saveOutfit);
+    document.querySelector("#clear").addEventListener('click', clearOutfit);
 }
 
 export function getOutfitPart(id){
@@ -42,14 +46,10 @@ export function runListeners(){
     });
 }
 
-document.querySelector("#save").addEventListener('click', saveOutfit);
-document.querySelector("#clear").addEventListener('click', clearOutfit);
+export function showActions() {
+    const outfitImages = [...outfit].map((item) => {return item.src !== defaultSrc});
+    const actions = document.querySelector("#actions");
 
-export function showActions(value = true) {
-    const outfitImages = [...document.querySelectorAll('.accordion .accordion-flush > div img')].map((item) => {return item.src !== defaultSrc});
-
-    if(outfitImages.length === 3 && !outfitImages.includes(false)) {
-        if(value) document.querySelector("#actions").classList.add('opacity-100');
-        else document.querySelector("#actions").classList.remove('opacity-100');
-    }
+    if(outfitImages.includes(true)) actions.classList.add('opacity-100');
+    else actions.classList.remove('opacity-100');
 }
