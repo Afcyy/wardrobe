@@ -24,5 +24,5 @@ export function clearOutfit(e){
         }
     });
 
-    showActions(false);
+    showActions();
 }
