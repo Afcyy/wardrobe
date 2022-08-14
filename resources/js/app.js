@@ -10,7 +10,9 @@ import {clearOutfit, saveOutfit} from "./forms";
 window.Alpine = Alpine;
 Alpine.start();
 
+export const baseUrl = 'http://wardrobe.test';
 export const defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="
+export const outfit = document.querySelectorAll('#outfit > div img');
 
 if(window.location.href.includes('create')){
     document.querySelector('#upload #tags').addEventListener('keyup', createTag);
@@ -45,7 +47,7 @@ export function runListeners(){
 }
 
 export function showActions() {
-    const outfitImages = [...document.querySelectorAll('#outfit > div img')].map((item) => {return item.src !== defaultSrc});
+    const outfitImages = [...outfit].map((item) => {return item.src !== defaultSrc});
     const actions = document.querySelector("#actions");
 
     if(outfitImages.includes(true)) actions.classList.add('opacity-100');
