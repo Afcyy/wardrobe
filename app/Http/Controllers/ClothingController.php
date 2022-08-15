@@ -6,9 +6,12 @@ use App\Http\Requests\StoreOutfitRequest;
 use App\Models\Category;
 use App\Models\Clothing;
 use App\Models\Season;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class ClothingController extends Controller
 {
@@ -100,7 +103,7 @@ class ClothingController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $clothing = Clothing::find($id);
+        $clothing =  auth()->user()->clothings()->find($id);
 
         $clothing->update([
            'category_id' => $request->get('category'),
@@ -119,10 +122,12 @@ class ClothingController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return void
+     * @return Application|Redirector|RedirectResponse
      */
     public function destroy(int $id)
     {
-        //
+        auth()->user()->clothings()->find($id)->delete();
+
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Item deleted successfully');
     }
 }
