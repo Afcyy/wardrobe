@@ -40,7 +40,7 @@
                         <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                             Click to remove</p>
                     </div>
-                    <form method="post" action="{{ route('save-outfit') }}" id="actions" class="relative group mt-4 opacity-0">
+                    <form method="post" action="{{ route('save.outfit') }}" id="actions" class="relative group mt-4 opacity-0">
                         {{ csrf_field() }}
                         <button type="button" id="save" class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
                         <button type="button" id="clear" class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
@@ -50,7 +50,7 @@
             <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">
                 <div id="header" class="flex items-center justify-between m-6">
                     <p class="text-xl font-bold text-black">Wardrobe</p>
-                    <a href="{{ route('create') }}"
+                    <a href="{{ route('clothes.create') }}"
                        class="bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400">Add new</a>
                 </div>
                 <div class="accordion accordion-flush" id="accordion">
@@ -376,7 +376,7 @@
                         </svg>
                         <div class="flex flex-col items-center mt-6">
                             <p class="font-medium text-center text-xl">You have no items yet.</p>
-                            <a href="{{ route('create') }}"
+                            <a href="{{ route('clothes.create') }}"
                                class="bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400 mt-4">Start
                                 creating wardrobe</a>
                         </div>
