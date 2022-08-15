@@ -50,7 +50,7 @@
             <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">
                 <div id="header" class="flex items-center justify-between m-6">
                     <p class="text-xl font-bold text-black">Wardrobe</p>
-                    <a href="{{ route('outfit.create') }}"
+                    <a href="{{ route('create') }}"
                        class="bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400">Add new</a>
                 </div>
                 <div class="accordion accordion-flush" id="accordion">
@@ -376,7 +376,7 @@
                         </svg>
                         <div class="flex flex-col items-center mt-6">
                             <p class="font-medium text-center text-xl">You have no items yet.</p>
-                            <a href="{{ route('outfit.create') }}"
+                            <a href="{{ route('create') }}"
                                class="bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400 mt-4">Start
                                 creating wardrobe</a>
                         </div>

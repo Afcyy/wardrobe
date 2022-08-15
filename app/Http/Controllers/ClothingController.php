@@ -25,7 +25,7 @@ class ClothingController extends Controller
             ->sortBy('category_id')
             ->groupBy('category.name');
 
-        return view('dashboard', compact('clothes'));
+        return view('clothes.index', compact('clothes'));
     }
 
     /**
@@ -38,7 +38,7 @@ class ClothingController extends Controller
         $seasons = Season::all();
         $categories = Category::all();
 
-        return view('upload', compact('seasons', 'categories'));
+        return view('clothes.upload', compact('seasons', 'categories'));
     }
 
     /**

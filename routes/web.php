@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware('auth')->group(function () {
-    Route::resource('outfit', ClothingController::class);
+    Route::resource('/', ClothingController::class);
     Route::post('save-outfit', [OutfitsController::class, 'store'])->name('save-outfit');
 });
 
