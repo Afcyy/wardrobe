@@ -37,8 +37,8 @@ class Clothing extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('preview')
+            ->addMediaConversion('outfits')
             ->fit(Manipulations::FIT_CROP, 300, 300)
-            ->nonQueued();
+            ->queued();
     }
 }
