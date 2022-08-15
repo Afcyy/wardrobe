@@ -112,10 +112,12 @@ class ClothingController extends Controller
 
         $clothing->seasons()->sync($request->get('season'));
 
-        $clothing->clearMediaCollection('outfits');
-        $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+        if($request->hasFile('image')){
+            $clothing->clearMediaCollection('outfits');
+            $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+        }
 
-        return back()->with('success', 'Item was edited successfully');
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Item was edited successfully');
     }
 
     /**
@@ -126,6 +128,8 @@ class ClothingController extends Controller
      */
     public function destroy(int $id)
     {
+
+        dd('BNO');
         auth()->user()->clothings()->find($id)->delete();
 
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item deleted successfully');

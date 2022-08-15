@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="{{ route('clothes.update', $clothing->id) }}" method="POST" enctype="multipart/form-data" id="upload"
+    <form action="{{ route('clothes.update', $clothing->id) }}" method="POST" enctype="multipart/form-data" id="edit"
           class="bg-white shadow-sm rounded-md h-4/5 w-11/12 overflow-y-auto scrollbar"
           onkeydown="return event.key !== 'Enter';">
         <div class="w-full h-full flex flex-col justify-center items-center my-1">
@@ -62,20 +62,10 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-between w-2/4">
-                <form action="{{ route('clothes.destroy', $clothing->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                            class="mr-1 w-2/4 text-white bg-red-500 hover:bg-red-600 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
-                        Delete
-                    </button>
-                </form>
-                <button type="submit"
-                        class="ml-1 w-2/4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
-                    Edit
-                </button>
-            </div>
+            <button type="submit"
+                    class="ml-1 w-2/4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+                Save
+            </button>
         </div>
     </form>
 

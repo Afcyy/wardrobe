@@ -42,7 +42,7 @@
                     </div>
                     <form method="post" action="{{ route('save.outfit') }}" id="actions" class="relative group mt-4 opacity-0">
                         {{ csrf_field() }}
-                        <button type="button" id="save" class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save</button>
+                        <button type="button" id="save" class="bg-blue-500 text-white text-sm rounded-md py-2 mx-1 px-4 hover:bg-blue-400">Save Outfit</button>
                         <button type="button" id="clear" class="bg-gray-100 text-blue-500 text-sm rounded-md py-2 mx-1 px-4">Clear</button>
                     </form>
                 </div>
@@ -73,11 +73,35 @@
                                      data-bs-parent="{{ '#accordion' . ucfirst($category) }}">
                                     <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
                                         @foreach($clothing as $item)
-                                            <img
-                                                src="{{ $item->getFirstMediaUrl('outfits') }}"
-                                                class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32"
-                                                alt="..."
-                                            />
+                                            <div class="image-holder relative group">
+                                                <img
+                                                    src="{{ $item->getFirstMediaUrl('outfits') }}"
+                                                    class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32 group-hover:brightness-50"
+                                                    alt="..."
+                                                />
+
+                                                <button id="dropdownButton" data-dropdown-toggle="dropdown" data-dropdown-placement="left-start" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100" type="button">
+                                                    <i data-feather="more-horizontal" class="stroke-white"></i>
+                                                </button>
+                                            </div>
+
+                                            @once
+                                                {{--Dropdown Menu--}}
+                                                <div id="dropdown" class="z-10 w-36 bg-white rounded-md border border-gray-300 block hidden">
+                                                    <ul class="text-sm" aria-labelledby="dropdownButton">
+                                                        <li>
+                                                            <a href="{{ route('clothes.edit', $item->id) }}" class="flex items-center block py-2 px-4 hover:bg-gray-100"><i data-feather="edit" class="mx-2 w-4"></i>Edit</a>
+                                                        </li>
+                                                        <li>
+                                                            <form action="{{ route('clothes.destroy', $item->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="flex items-center w-full py-2 px-4 bg-red-500 text-white hover:bg-red-400"><i data-feather="trash-2" class="mx-2 w-4"></i>Delete</button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endonce
                                         @endforeach
                                     </div>
                                 </div>
