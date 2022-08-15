@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOutfitRequest;
 use App\Models\Category;
+use App\Models\Clothing;
 use App\Models\Season;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -75,11 +76,19 @@ class ClothingController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return void
+     * @return View
      */
-    public function edit(int $id)
+    public function edit(int $id): View
     {
-        //
+        $clothing = auth()->user()
+            ->clothings()
+            ->whereId($id)
+            ->with(['seasons', 'tags', 'category'])
+            ->first();
+        $seasons = Season::all();
+        $categories = Category::all();
+
+        return view('clothes.edit', compact('seasons', 'categories', 'clothing'));
     }
 
     /**
@@ -87,11 +96,23 @@ class ClothingController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return void
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
-        //
+        $clothing = Clothing::find($id);
+
+        $clothing->update([
+           'category_id' => $request->get('category'),
+           'tags' => explode(',', $request->get('tags'))
+       ]);
+
+        $clothing->seasons()->sync($request->get('season'));
+
+        $clothing->clearMediaCollection('outfits');
+        $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+
+        return back()->with('success', 'Item was edited successfully');
     }
 
     /**
