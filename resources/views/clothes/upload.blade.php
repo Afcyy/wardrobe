@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="{{ route('outfit.store') }}" method="POST" enctype="multipart/form-data" id="upload"
+    <form action="{{ route('clothes.store') }}" method="POST" enctype="multipart/form-data" id="upload"
           class="bg-white shadow-sm rounded-md h-4/5 w-11/12 overflow-y-auto scrollbar"
           onkeydown="return event.key !== 'Enter';">
         <div class="w-full h-full flex flex-col justify-center items-center my-1">

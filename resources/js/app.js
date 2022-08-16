@@ -10,13 +10,13 @@ import {clearOutfit, saveOutfit} from "./forms";
 window.Alpine = Alpine;
 Alpine.start();
 
-export const baseUrl = 'http://wardrobe.test';
+export const baseUrl = 'http://wardrobe.local.test';
 export const defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="
 export const outfit = document.querySelectorAll('#outfit > div img');
 
 if(window.location.href.includes('create')){
     document.querySelector('#upload #tags').addEventListener('keyup', createTag);
-} else if(window.location.href.includes('outfit')){
+} else {
     runListeners();
 
     document.querySelector('#randomize').addEventListener('click', createRandomOutfit)

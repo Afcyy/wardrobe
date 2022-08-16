@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOutfitRequest;
 use App\Models\Category;
+use App\Models\Clothing;
 use App\Models\Season;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class ClothingController extends Controller
 {
@@ -25,7 +29,7 @@ class ClothingController extends Controller
             ->sortBy('category_id')
             ->groupBy('category.name');
 
-        return view('dashboard', compact('clothes'));
+        return view('clothes.index', compact('clothes'));
     }
 
     /**
@@ -38,7 +42,7 @@ class ClothingController extends Controller
         $seasons = Season::all();
         $categories = Category::all();
 
-        return view('upload', compact('seasons', 'categories'));
+        return view('clothes.upload', compact('seasons', 'categories'));
     }
 
     /**
@@ -51,7 +55,7 @@ class ClothingController extends Controller
     {
         $outfit = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
-            'tags' => explode(',', $request->get('tags'))
+            'tags' => explode(',', preg_replace('!\s+!', '', $request->get('tags')))
         ]);
 
         $outfit->seasons()->attach($request->get('season'));
@@ -75,11 +79,19 @@ class ClothingController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return void
+     * @return View
      */
-    public function edit(int $id)
+    public function edit(int $id): View
     {
-        //
+        $clothing = auth()->user()
+            ->clothings()
+            ->whereId($id)
+            ->with(['seasons', 'tags', 'category'])
+            ->first();
+        $seasons = Season::all();
+        $categories = Category::all();
+
+        return view('clothes.edit', compact('seasons', 'categories', 'clothing'));
     }
 
     /**
@@ -87,21 +99,37 @@ class ClothingController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return void
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
-        //
+        $clothing =  auth()->user()->clothings()->find($id);
+
+        $clothing->update([
+           'category_id' => $request->get('category'),
+           'tags' => explode(',', $request->get('tags'))
+       ]);
+
+        $clothing->seasons()->sync($request->get('season'));
+
+        if($request->hasFile('image')){
+            $clothing->clearMediaCollection('outfits');
+            $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+        }
+
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Item was edited successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return void
+     * @return Application|Redirector|RedirectResponse
      */
     public function destroy(int $id)
     {
-        //
+        auth()->user()->clothings()->find($id)->delete();
+
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Item deleted successfully');
     }
 }

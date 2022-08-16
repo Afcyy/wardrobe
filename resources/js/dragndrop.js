@@ -3,7 +3,7 @@ import {toggleEquipped, removeFromOutfit } from "./click-actions";
 
 export function drag(ev) {
     ev.target.classList.add('opacity-20');
-    const parentId = ev.target.parentElement.parentElement.parentElement.id;
+    const parentId = ev.target.parentElement.parentElement.parentElement.parentElement.id;
 
     getOutfitPart(parentId).classList.add('brightness-90');
 
@@ -20,7 +20,7 @@ export function dragover(ev) {
 export function dragend() {
     this.classList.remove('opacity-20');
 
-    const parentId = this.parentElement.parentElement.parentElement.id;
+    const parentId = this.parentElement.parentElement.parentElement.parentElement.id;
     const image =  getOutfitPart(parentId);
     image.classList.remove('brightness-90');
 

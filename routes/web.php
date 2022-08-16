@@ -15,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware('auth')->group(function () {
-    Route::resource('outfit', ClothingController::class);
-    Route::post('save-outfit', [OutfitsController::class, 'store'])->name('save-outfit');
+    Route::get('/', [ClothingController::class, 'index'])->name('index');
+
+    Route::resource('clothes', ClothingController::class)->except(['index']);
+    Route::post('save-outfit', [OutfitsController::class, 'store'])->name('save.outfit');
 });
 
 require __DIR__.'/auth.php';
