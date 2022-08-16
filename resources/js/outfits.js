@@ -21,7 +21,7 @@ export function createRandomOutfit()
             outfitPart.src = randomImage.src;
             toggleEquipped(outfitPart);
 
-            randomImage.remove();
+            randomImage.parentElement.remove();
         }
     })
 }

@@ -80,28 +80,10 @@
                                                     alt="..."
                                                 />
 
-                                                <button id="dropdownButton" data-dropdown-toggle="dropdown" data-dropdown-placement="left-start" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100" type="button">
-                                                    <i data-feather="more-horizontal" class="stroke-white"></i>
-                                                </button>
+                                                <a href="{{ route('clothes.edit', $item->id) }}" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100">
+                                                    <i data-feather="edit" class="stroke-white"></i>
+                                                </a>
                                             </div>
-
-                                            @once
-                                                {{--Dropdown Menu--}}
-                                                <div id="dropdown" class="z-10 w-36 bg-white rounded-md border border-gray-300 block hidden">
-                                                    <ul class="text-sm" aria-labelledby="dropdownButton">
-                                                        <li>
-                                                            <a href="{{ route('clothes.edit', $item->id) }}" class="flex items-center block py-2 px-4 hover:bg-gray-100"><i data-feather="edit" class="mx-2 w-4"></i>Edit</a>
-                                                        </li>
-                                                        <li>
-                                                            <form action="{{ route('clothes.destroy', $item->id) }}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="flex items-center w-full py-2 px-4 bg-red-500 text-white hover:bg-red-400"><i data-feather="trash-2" class="mx-2 w-4"></i>Delete</button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            @endonce
                                         @endforeach
                                     </div>
                                 </div>

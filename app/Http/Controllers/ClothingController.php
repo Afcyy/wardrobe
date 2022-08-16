@@ -128,8 +128,6 @@ class ClothingController extends Controller
      */
     public function destroy(int $id)
     {
-
-        dd('BNO');
         auth()->user()->clothings()->find($id)->delete();
 
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item deleted successfully');
