@@ -22,7 +22,7 @@
                     <label for="tags" class="text-sm font-medium text-gray-900">Tags</label>
                     <input type="text" name="tags" id="tags"
                            class="mt-1 border border-gray-200 w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                           value="{{ preg_replace('!\s+!', ' ', implode(',', $clothing->tags()->pluck('name')->toArray())) }}">
+                           value="{{ implode(', ', $clothing->tags()->pluck('name')->toArray()) }}">
                     <p class="text-sm text-gray-500">Separate tags with commas e.g - Comfortable, Traditional, etc.</p>
                 </div>
 

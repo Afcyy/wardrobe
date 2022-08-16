@@ -55,7 +55,7 @@ class ClothingController extends Controller
     {
         $outfit = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
-            'tags' => explode(',', $request->get('tags'))
+            'tags' => explode(',', preg_replace('!\s+!', '', $request->get('tags')))
         ]);
 
         $outfit->seasons()->attach($request->get('season'));
