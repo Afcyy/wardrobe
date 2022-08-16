@@ -107,7 +107,7 @@ class ClothingController extends Controller
 
         $clothing->update([
            'category_id' => $request->get('category'),
-           'tags' => explode(',', $request->get('tags'))
+           'tags' => explode(',', preg_replace('!\s+!', '', $request->get('tags')))
        ]);
 
         $clothing->seasons()->sync($request->get('season'));
