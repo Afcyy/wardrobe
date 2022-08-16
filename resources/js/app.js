@@ -16,7 +16,17 @@ export const outfit = document.querySelectorAll('#outfit > div img');
 
 if(window.location.href.includes('create')){
     document.querySelector('#upload #tags').addEventListener('keyup', createTag);
-} else {
+
+    document.querySelector('input[name="image"]').addEventListener('change', () => {
+       document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+       document.getElementById('uploadSvg').remove();
+    })
+} else if(window.location.href.includes('edit')) {
+    document.querySelector('input[name="image"]').addEventListener('change', () => {
+       document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+    })
+}
+else {
     runListeners();
 
     document.querySelector('#randomize').addEventListener('click', createRandomOutfit)
