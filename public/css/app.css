@@ -4398,6 +4398,15 @@ textarea.form-control.is-invalid {
 .w-36 {
   width: 9rem;
 }
+.w-12 {
+  width: 3rem;
+}
+.w-16 {
+  width: 4rem;
+}
+.w-14 {
+  width: 3.5rem;
+}
 .max-w-7xl {
   max-width: 80rem;
 }

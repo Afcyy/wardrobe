@@ -5486,6 +5486,14 @@ var outfit = document.querySelectorAll('#outfit > div img');
 
 if (window.location.href.includes('create')) {
   document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
+  document.querySelector('input[name="image"]').addEventListener('change', function () {
+    document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+    document.querySelector('#uploadSvg').remove();
+  });
+} else if (window.location.href.includes('edit')) {
+  document.querySelector('input[name="image"]').addEventListener('change', function () {
+    document.getElementById('editPreview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+  });
 } else {
   runListeners();
   document.querySelector('#randomize').addEventListener('click', _outfits__WEBPACK_IMPORTED_MODULE_6__.createRandomOutfit);
