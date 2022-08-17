@@ -42,18 +42,18 @@ class MediaCollection extends Collection implements Htmlable
     public function toHtml()
     {
         return e(json_encode(old($this->formFieldName ?? $this->collectionName) ?? $this->map(function (Media $media) {
-                return [
-                    'name' => $media->name,
-                    'file_name' => $media->file_name,
-                    'uuid' => $media->uuid,
-                    'preview_url' => $media->preview_url,
-                    'original_url' => $media->original_url,
-                    'order' => $media->order_column,
-                    'custom_properties' => $media->custom_properties,
-                    'extension' => $media->extension,
-                    'size' => $media->size,
-                ];
-            })->keyBy('uuid')));
+            return [
+                'name' => $media->name,
+                'file_name' => $media->file_name,
+                'uuid' => $media->uuid,
+                'preview_url' => $media->preview_url,
+                'original_url' => $media->original_url,
+                'order' => $media->order_column,
+                'custom_properties' => $media->custom_properties,
+                'extension' => $media->extension,
+                'size' => $media->size,
+            ];
+        })->keyBy('uuid')));
     }
 
     public function jsonSerialize(): array
@@ -63,17 +63,17 @@ class MediaCollection extends Collection implements Htmlable
         }
 
         return old($this->formFieldName ?? $this->collectionName) ?? $this->map(function (Media $media) {
-                return [
-                    'name' => $media->name,
-                    'file_name' => $media->file_name,
-                    'uuid' => $media->uuid,
-                    'preview_url' => $media->preview_url,
-                    'original_url' => $media->original_url,
-                    'order' => $media->order_column,
-                    'custom_properties' => $media->custom_properties,
-                    'extension' => $media->extension,
-                    'size' => $media->size,
-                ];
-            })->keyBy('uuid')->toArray();
+            return [
+                'name' => $media->name,
+                'file_name' => $media->file_name,
+                'uuid' => $media->uuid,
+                'preview_url' => $media->preview_url,
+                'original_url' => $media->original_url,
+                'order' => $media->order_column,
+                'custom_properties' => $media->custom_properties,
+                'extension' => $media->extension,
+                'size' => $media->size,
+            ];
+        })->keyBy('uuid')->toArray();
     }
 }
