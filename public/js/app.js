@@ -5442,7 +5442,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "baseUrl": () => (/* binding */ baseUrl),
 /* harmony export */   "defaultSrc": () => (/* binding */ defaultSrc),
 /* harmony export */   "getOutfitPart": () => (/* binding */ getOutfitPart),
 /* harmony export */   "outfit": () => (/* binding */ outfit),
@@ -5480,12 +5479,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
-var baseUrl = 'http://wardrobe.local.test';
 var defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII=";
 var outfit = document.querySelectorAll('#outfit > div img');
 
 if (window.location.href.includes('create')) {
   document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
+  document.querySelector('input[name="image"]').addEventListener('change', function () {
+    document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+    document.getElementById('uploadSvg').remove();
+  });
+} else if (window.location.href.includes('edit')) {
+  document.querySelector('input[name="image"]').addEventListener('change', function () {
+    document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+  });
 } else {
   runListeners();
   document.querySelector('#randomize').addEventListener('click', _outfits__WEBPACK_IMPORTED_MODULE_6__.createRandomOutfit);
@@ -5696,7 +5702,7 @@ function saveOutfit(e) {
   _app__WEBPACK_IMPORTED_MODULE_0__.outfit.forEach(function (item) {
     obj[item.id] = item.src;
   });
-  fetch(_app__WEBPACK_IMPORTED_MODULE_0__.baseUrl + "/save-outfit", {
+  fetch("/save-outfit", {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
