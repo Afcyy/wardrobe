@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+//!! Changed this file to prevent errors !!
+
 /**
  * @template TKey of array-key
  * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
