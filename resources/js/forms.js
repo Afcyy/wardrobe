@@ -7,7 +7,7 @@ export function saveOutfit(e) {
         obj[item.id] = item.src;
     })
 
-    fetch(baseUrl + "/save-outfit", {
+    fetch("/save-outfit", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
