@@ -31,14 +31,14 @@ class Clothing extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * @throws InvalidManipulation
-     */
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this
-            ->addMediaConversion('outfits')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
-            ->queued();
-    }
+//    /**
+//     * @throws InvalidManipulation
+//     */
+//    public function registerMediaConversions(Media $media = null): void
+//    {
+//        $this
+//            ->addMediaConversion('outfits')
+//            ->fit(Manipulations::FIT_CROP, 300, 300)
+//            ->queued();
+//    }
 }
