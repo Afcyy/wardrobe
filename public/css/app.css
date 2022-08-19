@@ -4935,6 +4935,10 @@ textarea.form-control.is-invalid {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
+.hover\:opacity-30:hover {
+  opacity: 0.3;
+}
+
 .focus\:z-10:focus {
   z-index: 10;
 }
@@ -5071,6 +5075,10 @@ textarea.form-control.is-invalid {
 
 .group:hover .group-hover\:opacity-100 {
   opacity: 1;
+}
+
+.group:hover .group-hover\:opacity-30 {
+  opacity: 0.3;
 }
 
 .group:hover .group-hover\:brightness-50 {
