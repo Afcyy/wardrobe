@@ -16,24 +16,29 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
         <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
 
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
+
         <!-- Primary Meta Tags -->
-        <title>Peacedrobe</title>
-        <meta name="title" content="Peacedrobe">
+        <title>Peacedrobe - plan your outfits easily</title>
+        <meta name="title" content="Peacedrobe - plan your outfits easily">
         <meta name="description" content="Peacedrobe is an online wardrobe, where you can easily plan your outfits without making a mess in your room">
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ config('app.url') }}">
-        <meta property="og:title" content="Peacedrobe">
+        <meta property="og:title" content="Peacedrobe - plan your outfits easily">
         <meta property="og:description" content="Peacedrobe is an online wardrobe, where you can easily plan your outfits without making a mess in your room">
-        <meta property="og:image" content="">
+        <meta property="og:image" content="{{ asset('images/meta-cover.png') }}">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content="{{ config('app.url') }}">
-        <meta property="twitter:title" content="Peacedrobe">
+        <meta property="twitter:title" content="Peacedrobe - plan your outfits easily">
         <meta property="twitter:description" content="Peacedrobe is an online wardrobe, where you can easily plan your outfits without making a mess in your room">
-        <meta property="twitter:image" content="">
+        <meta property="twitter:image" content="{{ asset('images/meta-cover.png') }}">
 
     </head>
     <body class="font-satoshi antialiased">
