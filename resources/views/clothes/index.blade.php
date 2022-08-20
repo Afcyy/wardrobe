@@ -16,7 +16,13 @@
                             Click to remove</p>
                     </div>
                     <div class="flex flex-row my-1">
-                        <div class="bg-center lg:h-36 w-24 h-24 bg-white mx-1 text-gray-300">Accessory 1</div>
+                        {{-- Accessory 1 --}}
+                        <div class="relative group">
+                            <img id="accessories-1" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
+                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
+                                Click to remove</p>
+                        </div>
                         {{-- Top --}}
                         <div class="relative group">
                             <img id="tops" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
@@ -24,7 +30,13 @@
                             <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                                 Click to remove</p>
                         </div>
-                        <div class="lg:h-36 w-24 h-24 bg-white mx-1 text-gray-300">Accessory 2</div>
+                        {{-- Accessory 2 --}}
+                        <div class="relative group">
+                            <img id="accessories-2" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
+                            <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
+                                Click to remove</p>
+                        </div>
                     </div>
                     {{-- Bottom --}}
                     <div class="relative group">

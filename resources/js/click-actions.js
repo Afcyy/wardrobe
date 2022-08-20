@@ -26,7 +26,7 @@ export function removeFromOutfit(ev) {
 }
 
 export function fromOutfitToWardrobe(parent, image, id){
-    document.querySelector(`#accordion #${id} .accordion-collapse .accordion-body`).insertAdjacentHTML('afterbegin',
+    document.querySelector(`#accordion #${id.split("-")[0]} .accordion-collapse .accordion-body`).insertAdjacentHTML('afterbegin',
     `<div class="image-holder relative group">
          <img
              src="${image.src}"

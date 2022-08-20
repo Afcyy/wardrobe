@@ -34,7 +34,10 @@ else {
 }
 
 export function getOutfitPart(id){
-    return document.querySelector(`#outfit #${id}`);
+    return document.querySelector(`#outfit #${id === 'accessories'
+        ? id + '-' + (Math.floor(Math.random() * 2) + 1)
+        : id
+    }`);
 }
 
 export function runListeners(){

@@ -18,6 +18,8 @@ export function createRandomOutfit()
                 fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
             }
 
+            console.log(outfitPart, randomImage)
+
             outfitPart.src = randomImage.src;
             toggleEquipped(outfitPart);
 
