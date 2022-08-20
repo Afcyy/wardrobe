@@ -31,7 +31,7 @@ export function dragend() {
             checkDragEnd(parentId + '-' + i, this);
         }
     } else {
-        checkDragEnd(parentId, this.src);
+        checkDragEnd(parentId, this);
     }
 }
 
