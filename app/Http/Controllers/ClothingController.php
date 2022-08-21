@@ -55,7 +55,7 @@ class ClothingController extends Controller
     {
         $outfit = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
-            'tags' => explode(',', preg_replace('!\s+!', '', $request->get('tags')))
+            'tags' => array_map('trim', explode(',', $request->get('tags')))
         ]);
 
         $outfit->seasons()->attach($request->get('season'));
@@ -107,7 +107,7 @@ class ClothingController extends Controller
 
         $clothing->update([
            'category_id' => $request->get('category'),
-           'tags' => explode(',', preg_replace('!\s+!', '', $request->get('tags')))
+           'tags' => array_map('trim', explode(',', $request->get('tags')))
        ]);
 
         $clothing->seasons()->sync($request->get('season'));
