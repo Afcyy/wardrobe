@@ -12,6 +12,7 @@ export function click(ev) {
 
         ev.target.closest('.accordion-body').querySelectorAll('img').forEach(image => {
             fromWardrobeToOutfit(image.src, image.id);
+            document.querySelector(`#accordion img[src='${image.src}']`)?.remove();
         });
     }
 }
