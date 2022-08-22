@@ -61,11 +61,16 @@
             </div>
             <div class="w-full sm:w-full h-full md:overflow-y-auto md:scrollbar">
                 <div id="header" class="flex items-center justify-between m-6">
-                    <p class="text-xl font-bold text-black">Wardrobe</p>
+                    <div id="tabs-switcher">
+                        <button id="wardrobe-tab" class="text-md font-bold text-blue-500 underline underline-offset-4 decoration-inherit cursor-pointer hover:text-blue-400">Wardrobe</button>
+                        @if(!$outfits->isEmpty())
+                            <button id="outfits-tab" class="text-md font-medium text-black cursor-pointer hover:text-gray-600 ml-4">Saved outfits</button>
+                        @endif
+                    </div>
                     <a href="{{ route('clothes.create') }}"
                        class="bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400">Add new</a>
                 </div>
-                <div class="accordion accordion-flush" id="accordion">
+                <div class="accordion-container accordion accordion-flush" id="accordion">
                     @foreach($clothes as $category => $clothing)
                         <div class="accordion accordion-flush" id="{{ $category . 'Accordion' }}">
                             <div
@@ -88,7 +93,46 @@
                                             <div class="image-holder relative group">
                                                 <img
                                                     src="{{ $item->getFirstMediaUrl('outfits') }}"
-                                                    class="my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32 group-hover:brightness-50"
+                                                    class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-28 group-hover:brightness-50"
+                                                    alt="..."
+                                                />
+
+                                                <a href="{{ route('clothes.edit', $item->id) }}" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100">
+                                                    <i data-feather="edit" class="stroke-white"></i>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="accordion-container accordion accordion-flush hidden" id="outfitsAccordion">
+                    @foreach($outfits as $group => $outfit)
+                        <div class="accordion accordion-flush" id="{{ $group . 'Accordion' }}">
+                            <div
+                                id="{{ $group }}" class="accordion-item rounded-none">
+                                <h2 class="accordion-header mb-0" id="{{ 'flush-heading' . ucfirst($group) }}">
+                                    <button
+                                        class="accordion-button relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left border-0 rounded-none transition focus:outline-none"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="{{ '#flush-' . $group . 'Collapse' }}"
+                                        aria-expanded="false" aria-controls="{{ 'flush-' . $group . 'Collapse' }}">
+                                        {{ "Outfit #" . substr($group, 0, 4) }}
+                                    </button>
+                                </h2>
+                                <div id="{{ 'flush-' . $group . 'Collapse' }}"
+                                     class="accordion-collapse border-0 collapse show"
+                                     aria-labelledby="{{ 'flush-heading' . ucfirst($group) }}"
+                                     data-bs-parent="{{ '#accordion' . ucfirst($group) }}">
+                                    <div class="accordion-body py-4 px-5 flex flew-row flex-wrap">
+                                        @foreach($outfit as $item)
+                                            <div class="image-holder relative group">
+                                                <img
+                                                    id="{{ $item->category }}"
+                                                    src="{{ $item->image_src }}"
+                                                    class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-24 group-hover:brightness-50"
                                                     alt="..."
                                                 />
 
