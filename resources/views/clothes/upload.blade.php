@@ -1,8 +1,8 @@
 <x-app-layout>
     <form action="{{ route('clothes.store') }}" method="POST" enctype="multipart/form-data" id="upload"
-          class="bg-white shadow-sm rounded-md h-4/5 w-11/12 overflow-y-auto scrollbar"
+          class="bg-white shadow-sm rounded-md h-4/5 w-11/12"
           onkeydown="return event.key !== 'Enter';">
-        <div class="w-full h-full flex flex-col justify-center items-center my-1">
+        <div class="w-full h-full flex flex-col items-center my-2 overflow-y-scroll scrollbar md:justify-center">
             {{ csrf_field() }}
 
             <div class="my-6 w-2/4 h-auto">
@@ -51,19 +51,22 @@
                                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                             </svg>
                             <img id="preview" class="w-20" src="" alt="">
-                            <p class="mb-1 text-sm text-gray-500"><span class="font-semibold">Click to upload</span>
-                                or drag and drop</p>
-                            <p class="text-xs text-gray-500">PNG, JPG or JPEG (MAX. 200Kb)</p>
+                            <p class="mb-1 font-semibold text-sm text-gray-500 text-center">
+                                Click to upload
+                                <span class="font-normal lg:flex hidden">or drag and drop</span></p>
+                            <p class="text-xs text-gray-500 md:block hidden">PNG, JPG or JPEG (MAX. 200Kb)</p>
                         </div>
                         <input name="image" id="dropzone-file" type="file" class="hidden"/>
                     </label>
                 </div>
             </div>
 
-            <button type="submit"
-                    class="w-2/4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
-                Add to wardrobe
-            </button>
+            <div class="flex w-full justify-center">
+                <button type="submit"
+                        class="w-2/4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 mb-10 focus:outline-none">
+                    Add to wardrobe
+                </button>
+            </div>
         </div>
     </form>
 
