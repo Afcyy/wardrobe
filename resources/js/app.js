@@ -12,6 +12,8 @@ Alpine.start();
 
 export const defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="
 export const outfit = document.querySelectorAll('#outfit > div img');
+const activeTabClass = ['font-bold', 'text-blue-500', 'underline', 'underline-offset-4', 'decoration-inherit', 'cursor-pointer', 'hover:text-blue-400'];
+const inactiveTabClass = ['font-medium', 'text-black', 'cursor-pointer', 'hover:text-gray-600'];
 
 if(window.location.href.includes('create')){
     document.querySelector('#upload #tags').addEventListener('keyup', createTag);
@@ -24,13 +26,16 @@ if(window.location.href.includes('create')){
     document.querySelector('input[name="image"]').addEventListener('change', () => {
        document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
     })
-}
-else {
+} else {
     runListeners();
 
     document.querySelector('#randomize').addEventListener('click', createRandomOutfit)
     document.querySelector("#save").addEventListener('click', saveOutfit);
-    document.querySelector("#clear").addEventListener('click', clearOutfit);
+    document.querySelector("#clear").addEventListener('click', clearOutfit)
+
+    document.querySelectorAll('#tabs-switcher button').forEach(button => {
+        button.addEventListener('click', () => switchTabTo(button.id));
+    })
 }
 
 export function getOutfitPart(id){
@@ -40,7 +45,7 @@ export function getOutfitPart(id){
     }`);
 }
 
-export function runListeners(){
+export function runListeners() {
     document.querySelectorAll('#accordion img').forEach(function (item) {
         item.classList.add('cursor-move');
 
@@ -56,6 +61,10 @@ export function runListeners(){
         item.parentElement.addEventListener('drop', drop);
         item.parentElement.querySelector('p').addEventListener('dragover', dragover);
     });
+
+    document.querySelectorAll('#outfitsAccordion img').forEach(function (item) {
+        item.addEventListener('click', click);
+    })
 }
 
 export function showActions() {
@@ -64,4 +73,22 @@ export function showActions() {
 
     if(outfitImages.includes(true)) actions.classList.add('opacity-100');
     else actions.classList.remove('opacity-100');
+}
+
+function switchTabTo(activeTab){
+    const inactiveTab = ['wardrobe-tab', 'outfits-tab'].filter(tab => tab !== activeTab).toString();
+
+    document.getElementById(activeTab).classList.remove(...inactiveTabClass);
+    document.getElementById(activeTab).classList.add(...activeTabClass);
+
+    document.getElementById(inactiveTab).classList.remove(...activeTabClass);
+    document.getElementById(inactiveTab).classList.add(...inactiveTabClass);
+
+    if(activeTab === 'outfits-tab'){
+        document.getElementById("accordion").classList.add('hidden');
+        document.getElementById("outfitsAccordion").classList.remove('hidden');
+    } else if(activeTab === 'wardrobe-tab'){
+        document.getElementById("accordion").classList.remove('hidden');
+        document.getElementById("outfitsAccordion").classList.add('hidden');
+    }
 }

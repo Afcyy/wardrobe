@@ -4,7 +4,9 @@ import {fromOutfitToWardrobe} from "./click-actions";
 export function saveOutfit(e) {
     const obj = {};
     outfit.forEach((item) => {
-        obj[item.id] = item.src;
+        if(item.src !== defaultSrc){
+            obj[item.id] = item.src;
+        }
     })
 
     fetch("/save-outfit", {

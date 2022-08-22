@@ -29,7 +29,9 @@ class ClothingController extends Controller
             ->sortBy('category_id')
             ->groupBy('category.name');
 
-        return view('clothes.index', compact('clothes'));
+        $outfits = auth()->user()->outfits()->get()->groupBy('group_id');
+
+        return view('clothes.index', compact('clothes', 'outfits'));
     }
 
     /**
@@ -104,6 +106,7 @@ class ClothingController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $clothing =  auth()->user()->clothings()->find($id);
+        $outfit = auth()->user()->outfits()->where('image_src', $clothing->getFirstMediaUrl('outfits'));
 
         $clothing->update([
            'category_id' => $request->get('category'),
@@ -117,6 +120,11 @@ class ClothingController extends Controller
             $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
         }
 
+        $outfit->update([
+            'category' => Category::find($request->get('category'))->name,
+            'image_src' => $clothing->getFirstMediaUrl('outfits')
+        ]);
+
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item was edited successfully');
     }
 
@@ -128,7 +136,10 @@ class ClothingController extends Controller
      */
     public function destroy(int $id)
     {
-        auth()->user()->clothings()->find($id)->delete();
+        $clothing = auth()->user()->clothings()->find($id);
+
+        auth()->user()->outfits()->where('image_src', $clothing->getFirstMediaUrl('outfits'))->delete();
+        $clothing->delete();
 
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item deleted successfully');
     }

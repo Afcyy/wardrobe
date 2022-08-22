@@ -5481,6 +5481,8 @@ window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 var defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII=";
 var outfit = document.querySelectorAll('#outfit > div img');
+var activeTabClass = ['font-bold', 'text-blue-500', 'underline', 'underline-offset-4', 'decoration-inherit', 'cursor-pointer', 'hover:text-blue-400'];
+var inactiveTabClass = ['font-medium', 'text-black', 'cursor-pointer', 'hover:text-gray-600'];
 
 if (window.location.href.includes('create')) {
   document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
@@ -5497,6 +5499,11 @@ if (window.location.href.includes('create')) {
   document.querySelector('#randomize').addEventListener('click', _outfits__WEBPACK_IMPORTED_MODULE_6__.createRandomOutfit);
   document.querySelector("#save").addEventListener('click', _forms__WEBPACK_IMPORTED_MODULE_7__.saveOutfit);
   document.querySelector("#clear").addEventListener('click', _forms__WEBPACK_IMPORTED_MODULE_7__.clearOutfit);
+  document.querySelectorAll('#tabs-switcher button').forEach(function (button) {
+    button.addEventListener('click', function () {
+      return switchTabTo(button.id);
+    });
+  });
 }
 
 function getOutfitPart(id) {
@@ -5515,6 +5522,9 @@ function runListeners() {
     item.parentElement.addEventListener('drop', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.drop);
     item.parentElement.querySelector('p').addEventListener('dragover', _dragndrop__WEBPACK_IMPORTED_MODULE_3__.dragover);
   });
+  document.querySelectorAll('#outfitsAccordion img').forEach(function (item) {
+    item.addEventListener('click', _click_actions__WEBPACK_IMPORTED_MODULE_4__.click);
+  });
 }
 function showActions() {
   var outfitImages = _toConsumableArray(outfit).map(function (item) {
@@ -5523,6 +5533,30 @@ function showActions() {
 
   var actions = document.querySelector("#actions");
   if (outfitImages.includes(true)) actions.classList.add('opacity-100');else actions.classList.remove('opacity-100');
+}
+
+function switchTabTo(activeTab) {
+  var _document$getElementB, _document$getElementB2, _document$getElementB3, _document$getElementB4;
+
+  var inactiveTab = ['wardrobe-tab', 'outfits-tab'].filter(function (tab) {
+    return tab !== activeTab;
+  }).toString();
+
+  (_document$getElementB = document.getElementById(activeTab).classList).remove.apply(_document$getElementB, inactiveTabClass);
+
+  (_document$getElementB2 = document.getElementById(activeTab).classList).add.apply(_document$getElementB2, activeTabClass);
+
+  (_document$getElementB3 = document.getElementById(inactiveTab).classList).remove.apply(_document$getElementB3, activeTabClass);
+
+  (_document$getElementB4 = document.getElementById(inactiveTab).classList).add.apply(_document$getElementB4, inactiveTabClass);
+
+  if (activeTab === 'outfits-tab') {
+    document.getElementById("accordion").classList.add('hidden');
+    document.getElementById("outfitsAccordion").classList.remove('hidden');
+  } else if (activeTab === 'wardrobe-tab') {
+    document.getElementById("accordion").classList.remove('hidden');
+    document.getElementById("outfitsAccordion").classList.add('hidden');
+  }
 }
 
 /***/ }),
@@ -5587,9 +5621,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/app.js");
 
 function click(ev) {
-  var targetSrc = ev.target.src;
-  var parentId = ev.target.parentElement.parentElement.parentElement.parentElement.id;
-  var outfitPart = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(parentId);
+  var parent = ev.target.closest('.accordion-container');
+
+  if (parent.id === 'accordion') {
+    fromWardrobeToOutfit(ev.target.src, ev.target.closest('.accordion-item').id);
+    ev.target.parentElement.remove();
+  } else {
+    document.querySelectorAll('#outfit img').forEach(function (image) {
+      return image.src = _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc;
+    });
+    ev.target.closest('.accordion-body').querySelectorAll('img').forEach(function (image) {
+      fromWardrobeToOutfit(image.src, image.id);
+    });
+  }
+}
+
+function fromWardrobeToOutfit(targetSrc, targetId) {
+  var outfitPart = (0,_app__WEBPACK_IMPORTED_MODULE_0__.getOutfitPart)(targetId);
 
   if (outfitPart.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
     fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id);
@@ -5597,8 +5645,8 @@ function click(ev) {
 
   outfitPart.src = targetSrc;
   toggleEquipped(outfitPart);
-  ev.target.parentElement.remove();
 }
+
 function removeFromOutfit(ev) {
   var parent = ev.target.parentNode;
   var image = parent.querySelector('img');
@@ -5609,7 +5657,12 @@ function removeFromOutfit(ev) {
   }
 }
 function fromOutfitToWardrobe(parent, image, id) {
-  document.querySelector("#accordion #".concat(id.split("-")[0], " .accordion-collapse .accordion-body")).insertAdjacentHTML('afterbegin', "<div class=\"image-holder relative group\">\n         <img\n             src=\"".concat(image.src, "\"\n             class=\"my-2 mx-2 p-1 bg-white border rounded lg:h-44 h-32 group-hover:brightness-50\"\n             alt=\"...\"\n         />\n\n         <a href=\"http://wardrobe.local.test/clothes/22/edit\" class=\"flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100\">\n             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-edit stroke-white\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"></path><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"></path></svg>\n         </a>\n     </div>"));
+  var wardrobePart = document.querySelector("#accordion #".concat(id.split("-")[0], " .accordion-collapse .accordion-body"));
+
+  if (!wardrobePart.querySelector("img[src='".concat(image.src, "']"))) {
+    wardrobePart.insertAdjacentHTML('afterbegin', "<div class=\"image-holder relative group\">\n             <img\n                 src=\"".concat(image.src, "\"\n                 class=\"my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-28 group-hover:brightness-50\"\n                 alt=\"...\"\n             />\n\n             <a href=\"http://wardrobe.local.test/clothes/22/edit\" class=\"flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100\">\n                 <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-edit stroke-white\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"></path><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"></path></svg>\n             </a>\n         </div>"));
+  }
+
   image.src = _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc;
   toggleEquipped(image);
   (0,_app__WEBPACK_IMPORTED_MODULE_0__.runListeners)();
@@ -5670,7 +5723,7 @@ function dragend() {
       checkDragEnd(parentId + '-' + i, this);
     }
   } else {
-    checkDragEnd(parentId, this.src);
+    checkDragEnd(parentId, this);
   }
 }
 function drop(ev) {
@@ -5718,7 +5771,9 @@ __webpack_require__.r(__webpack_exports__);
 function saveOutfit(e) {
   var obj = {};
   _app__WEBPACK_IMPORTED_MODULE_0__.outfit.forEach(function (item) {
-    obj[item.id] = item.src;
+    if (item.src !== _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc) {
+      obj[item.id] = item.src;
+    }
   });
   fetch("/save-outfit", {
     method: "POST",
@@ -5771,7 +5826,6 @@ function createRandomOutfit() {
         (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.fromOutfitToWardrobe)(outfitPart.parentElement, outfitPart, outfitPart.id);
       }
 
-      console.log(outfitPart, randomImage);
       outfitPart.src = randomImage.src;
       (0,_click_actions__WEBPACK_IMPORTED_MODULE_1__.toggleEquipped)(outfitPart);
       randomImage.parentElement.remove();
