@@ -1,4 +1,5 @@
 import {defaultSrc, getOutfitPart, runListeners, showActions} from "./app";
+import {clearOutfit} from "./forms";
 
 export function click(ev) {
     const parent = ev.target.closest('.accordion-container');
@@ -8,7 +9,7 @@ export function click(ev) {
 
         ev.target.parentElement.remove();
     } else {
-        document.querySelectorAll('#outfit img').forEach(image => image.src = defaultSrc);
+        clearOutfit();
 
         ev.target.closest('.accordion-body').querySelectorAll('img').forEach(image => {
             fromWardrobeToOutfit(image.src, image.id);

@@ -5619,6 +5619,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "toggleEquipped": () => (/* binding */ toggleEquipped)
 /* harmony export */ });
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/app.js");
+/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms */ "./resources/js/forms.js");
+
 
 function click(ev) {
   var parent = ev.target.closest('.accordion-container');
@@ -5627,9 +5629,7 @@ function click(ev) {
     fromWardrobeToOutfit(ev.target.src, ev.target.closest('.accordion-item').id);
     ev.target.parentElement.remove();
   } else {
-    document.querySelectorAll('#outfit img').forEach(function (image) {
-      return image.src = _app__WEBPACK_IMPORTED_MODULE_0__.defaultSrc;
-    });
+    (0,_forms__WEBPACK_IMPORTED_MODULE_1__.clearOutfit)();
     ev.target.closest('.accordion-body').querySelectorAll('img').forEach(function (image) {
       var _document$querySelect;
 
