@@ -4151,10 +4151,6 @@ textarea.form-control.is-invalid {
   margin-left: 3.5rem;
   margin-right: 3.5rem;
 }
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
-}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -4834,6 +4830,10 @@ textarea.form-control.is-invalid {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));
 }
+.ring-blue-300 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(164 202 254 / var(--tw-ring-opacity));
+}
 .ring-opacity-5 {
   --tw-ring-opacity: 0.05;
 }
@@ -4925,6 +4925,11 @@ textarea.form-control.is-invalid {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 86 219 / var(--tw-bg-opacity));
+}
+
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -4992,6 +4997,11 @@ textarea.form-control.is-invalid {
 .focus\:border-gray-300:focus {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.focus\:border-blue-900:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(35 56 118 / var(--tw-border-opacity));
 }
 
 .focus\:bg-gray-100:focus {
@@ -5080,6 +5090,11 @@ textarea.form-control.is-invalid {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
+.active\:bg-blue-900:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(35 56 118 / var(--tw-bg-opacity));
+}
+
 .active\:text-gray-700:active {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
@@ -5154,10 +5169,6 @@ textarea.form-control.is-invalid {
 
   .sm\:ml-6 {
     margin-left: 1.5rem;
-  }
-
-  .sm\:mt-2 {
-    margin-top: 0.5rem;
   }
 
   .sm\:block {
