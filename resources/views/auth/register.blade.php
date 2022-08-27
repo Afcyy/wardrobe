@@ -50,7 +50,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4 bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400">
+                <x-button class="ml-4 text-white text-sm rounded-md py-2 px-4">
                     {{ __('Register') }}
                 </x-button>
             </div>

@@ -52,7 +52,7 @@
                 </a>
 
 
-                <x-button class="ml-3 bg-blue-500 text-white text-sm rounded-md py-2 px-4 hover:bg-blue-400">
+                <x-button class="ml-3 text-white text-sm rounded-md py-2 px-4">
                     {{ __('Log in') }}
                 </x-button>
             </div>
