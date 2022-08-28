@@ -95,6 +95,7 @@
                                                     src="{{ $item->getFirstMediaUrl('outfits') }}"
                                                     class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-28 group-hover:brightness-50"
                                                     alt="..."
+                                                    data-clothing-id="{{ $item->id }}"
                                                 />
 
                                                 <a href="{{ route('clothes.edit', $item->id) }}" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100">
@@ -130,13 +131,13 @@
                                         @foreach($outfit as $item)
                                             <div class="image-holder relative group">
                                                 <img
-                                                    id="{{ $item->category }}"
-                                                    src="{{ $item->image_src }}"
+                                                    id="{{ $item->clothing->category->name }}"
+                                                    src="{{ $item->clothing->getFirstMediaUrl('outfits') }}"
                                                     class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-24 group-hover:brightness-50"
                                                     alt="..."
                                                 />
 
-                                                <a href="{{ route('clothes.edit', $item->id) }}" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100">
+                                                <a href="{{ route('clothes.edit', $item->clothing_id) }}" class="flex text-sm rounded-full md:mr-0 absolute right-5 top-5 opacity-0 group-hover:opacity-100">
                                                     <i data-feather="edit" class="stroke-white"></i>
                                                 </a>
                                             </div>

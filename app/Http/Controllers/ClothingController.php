@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOutfitRequest;
+use App\Http\Requests\StoreClothingRequest;
 use App\Models\Category;
 use App\Models\Clothing;
 use App\Models\Season;
@@ -29,7 +29,7 @@ class ClothingController extends Controller
             ->sortBy('category_id')
             ->groupBy('category.name');
 
-        $outfits = auth()->user()->outfits()->get()->groupBy('group_id');
+        $outfits = auth()->user()->outfits()->with('clothing')->get()->groupBy('group_id');
 
         return view('clothes.index', compact('clothes', 'outfits'));
     }
@@ -50,18 +50,18 @@ class ClothingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreOutfitRequest $request
+     * @param StoreClothingRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreOutfitRequest $request): RedirectResponse
+    public function store(StoreClothingRequest $request): RedirectResponse
     {
-        $outfit = auth()->user()->clothings()->create([
+        $clothing = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
             'tags' => array_map('trim', explode(',', $request->get('tags')))
         ]);
 
-        $outfit->seasons()->attach($request->get('season'));
-        $outfit->addMediaFromRequest('image')->toMediaCollection('outfits');
+        $clothing->seasons()->attach($request->get('season'));
+        $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
 
         return back()->with('success', 'Item was added successfully');
     }
@@ -106,7 +106,6 @@ class ClothingController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $clothing =  auth()->user()->clothings()->find($id);
-        $outfit = auth()->user()->outfits()->where('image_src', $clothing->getFirstMediaUrl('outfits'));
 
         $clothing->update([
            'category_id' => $request->get('category'),
@@ -120,11 +119,6 @@ class ClothingController extends Controller
             $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
         }
 
-        $outfit->update([
-            'category' => Category::find($request->get('category'))->name,
-            'image_src' => $clothing->getFirstMediaUrl('outfits')
-        ]);
-
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item was edited successfully');
     }
 
@@ -136,10 +130,7 @@ class ClothingController extends Controller
      */
     public function destroy(int $id)
     {
-        $clothing = auth()->user()->clothings()->find($id);
-
-        auth()->user()->outfits()->where('image_src', $clothing->getFirstMediaUrl('outfits'))->delete();
-        $clothing->delete();
+        auth()->user()->clothings()->find($id)->delete();
 
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item deleted successfully');
     }

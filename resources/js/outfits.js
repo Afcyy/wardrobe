@@ -19,6 +19,7 @@ export function createRandomOutfit()
             }
 
             outfitPart.src = randomImage.src;
+            outfitPart.dataset.clothingId = randomImage.dataset.clothingId;
             toggleEquipped(outfitPart);
 
             randomImage.parentElement.remove();
