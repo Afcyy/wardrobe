@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('group_id');
             $table->foreignId('user_id');
-            $table->string('category');
-            $table->string('image_src');
+            $table->foreignId('clothing_id')
+                ->references('id')
+                ->on('clothing')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
