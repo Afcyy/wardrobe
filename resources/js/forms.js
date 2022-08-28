@@ -1,11 +1,12 @@
-import {baseUrl, defaultSrc, outfit, showActions} from "./app";
+import {baseUrl, defaultSrc, getOutfitPart, outfit, showActions} from "./app";
 import {fromOutfitToWardrobe} from "./click-actions";
 
 export function saveOutfit(e) {
-    const obj = {};
+    const items = [];
+
     outfit.forEach((item) => {
-        if(item.src !== defaultSrc){
-            obj[item.id] = item.src;
+        if(item.src !== defaultSrc && item.dataset.clothingId){
+            items.push(parseInt(item.dataset.clothingId))
         }
     })
 
@@ -15,7 +16,7 @@ export function saveOutfit(e) {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.getElementsByName('_token')[0].value
         },
-        body: JSON.stringify(obj)
+        body: JSON.stringify({'data': items})
     }).then(r => window.location.reload());
 }
 

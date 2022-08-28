@@ -5,27 +5,28 @@ export function click(ev) {
     const parent = ev.target.closest('.accordion-container');
 
     if (parent.id === 'accordion') {
-        fromWardrobeToOutfit(ev.target.src, ev.target.closest('.accordion-item').id);
+        fromWardrobeToOutfit(ev.target, ev.target.closest('.accordion-item').id);
 
         ev.target.parentElement.remove();
     } else {
         clearOutfit();
 
         ev.target.closest('.accordion-body').querySelectorAll('img').forEach(image => {
-            fromWardrobeToOutfit(image.src, image.id);
+            fromWardrobeToOutfit(image, image.id);
             document.querySelector(`#accordion img[src='${image.src}']`)?.remove();
         });
     }
 }
 
-function fromWardrobeToOutfit(targetSrc, targetId) {
+async function fromWardrobeToOutfit(target, targetId) {
     const outfitPart = getOutfitPart(targetId);
 
     if (outfitPart.src !== defaultSrc) {
         fromOutfitToWardrobe(outfitPart.parentElement, outfitPart, outfitPart.id)
     }
 
-    outfitPart.src = targetSrc;
+    outfitPart.src = target.src;
+    outfitPart.dataset.clothingId = target.dataset.clothingId;
     toggleEquipped(outfitPart);
 }
 
@@ -46,6 +47,7 @@ export function fromOutfitToWardrobe(parent, image, id) {
         wardrobePart.insertAdjacentHTML('afterbegin', `<div class="image-holder relative group">
              <img
                  src="${image.src}"
+                 data-clothing-id="${image.dataset.clothingId}"
                  class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-28 group-hover:brightness-50"
                  alt="..."
              />
@@ -57,6 +59,7 @@ export function fromOutfitToWardrobe(parent, image, id) {
     }
 
     image.src = defaultSrc;
+    delete image.dataset.clothingId
     toggleEquipped(image);
     runListeners();
 }
