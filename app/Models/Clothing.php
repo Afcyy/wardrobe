@@ -31,6 +31,11 @@ class Clothing extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+    public function outfit(): BelongsTo
+    {
+        return $this->belongsTo(Outfit::class);
+    }
+
 //    /**
 //     * @throws InvalidManipulation
 //     */
