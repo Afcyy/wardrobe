@@ -64,11 +64,15 @@
                 @if(session()->has('error'))
                     <div class="bg-red-500 rounded-md w-fit absolute top-5 right-10 border-2 border-red-700">
                         <p class="text-white px-6 pt-2">Please fix errors below:</p>
+                        @if(is_array(session()->pull('error')))
                         <ul class="list-disc py-2">
-                            @foreach(array_values(session()->pull('error')) as $error)
-                                <li class="text-white text-sm mx-14 py-2">{{ $error[0] }}</li>
-                            @endforeach
+                                @foreach(array_values(session()->pull('error')) as $error)
+                                    <li class="text-white text-sm mx-14 py-2">{{ $error[0] }}</li>
+                                @endforeach
                         </ul>
+                        @else
+                            <p class="text-white px-6 py-2">{{ session()->pull('error') }}</p>
+                        @endif
                     </div>
                 @endif
 
