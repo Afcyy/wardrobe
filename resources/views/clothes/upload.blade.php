@@ -6,7 +6,7 @@
             {{ csrf_field() }}
 
             <div class="my-6 w-2/4 h-auto">
-                <label for="tags" class="text-sm font-medium text-gray-900">Category</label>
+                <label for="category" class="text-sm font-medium text-gray-900">Category</label>
                 <select name="category" id="categories"
                         class="mt-1 bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option selected disabled>Choose a category</option>
@@ -17,10 +17,10 @@
             </div>
 
             <div class="mb-6 w-2/4 h-auto">
-                <label for="tags" class="text-sm font-medium text-gray-900">Tags</label>
+                <label for="tags" class="text-sm font-medium text-gray-900">Tags <span class="text-gray-500 text-xs font-normal">(Optional)</span></label>
                 <input type="text" name="tags" id="tags"
                        class="mt-1 border border-gray-200 w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                <p class="text-sm text-gray-500">Separate tags with commas e.g - Comfortable, Traditional, etc.</p>
+                <p class="text-sm text-gray-500">Separate tags with commas e.g - Comfortable, Stylish, etc.</p>
             </div>
 
             <div class="mb-6 w-2/4 h-fit">
