@@ -44,22 +44,39 @@
                         </ul>
                     </div>
 
-                    <div class="mb-6 w-2/4 h-fit">
-                        <label for="image" class="text-sm font-medium text-gray-900">Image</label>
-                        <div class="mt-1 flex justify-center items-center w-full">
-                            <label for="dropzone-file"
-                                   class="flex flex-col justify-center items-center w-full h-44 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer">
-                                <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                                    <img id="preview" class="w-20" src="{{ $clothing->getFirstMediaUrl('outfits') }}" alt="">
-                                    <p class="mb-1 font-semibold text-sm text-gray-500 text-center">
-                                        Click to replace
-                                        <span class="font-normal lg:flex hidden">or drag and drop</span></p>
-                                    <p class="text-xs text-gray-500 md:block hidden">PNG, JPG or JPEG (MAX. 200Kb)</p>
-                                </div>
-                                <input name="image" id="dropzone-file" type="file" class="hidden"/>
-                            </label>
-                        </div>
+                    <div class="mb-6 w-2/4 h-auto">
+                        <label for="img_options" class="text-sm font-medium text-gray-900">Upload photo</label>
+                        <select name="img_options" id="img_options"
+                                class="mt-1 bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="image_url" @if($clothing->image_url) selected @endif>From URL</option>
+                            <option value="dropzone-file" @if(!$clothing->image_url) selected @endif>From my files</option>
+                        </select>
                     </div>
+
+                    {{--Image options--}}
+                        <div class="mb-6 w-2/4 h-auto @if(!$clothing->image_url) hidden @endif">
+                            <label for="image_url" class="text-sm font-medium text-gray-900">Image URL</label>
+                            <input type="text" name="image_url" id="image_url" value="{{ $clothing->image_url }}"
+                                   class="mt-1 border border-gray-200 w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        </div>
+
+                        <div class="mb-6 w-2/4 h-fit  @if($clothing->image_url) hidden @endif">
+                            <label for="image" class="text-sm font-medium text-gray-900">Image</label>
+                            <div class="mt-1 flex justify-center items-center w-full">
+                                <label for="dropzone-file"
+                                       class="overflow-y-auto scrollbar flex flex-col justify-center items-center w-full h-44 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer">
+                                    <div class="flex flex-col justify-center items-center pt-5 pb-6">
+                                        <img id="preview" class="w-20" src="{{ $clothing->image }}" alt="">
+                                        <p class="mb-1 font-semibold text-sm text-gray-500 text-center">
+                                            Click to replace
+                                            <span class="font-normal lg:flex hidden">or drag and drop</span></p>
+                                        <p class="text-xs text-gray-500 md:block hidden">PNG, JPG or JPEG (MAX. 200Kb)</p>
+                                    </div>
+                                    <input name="image" id="dropzone-file" type="file" class="hidden"/>
+                                </label>
+                            </div>
+                        </div>
+                    {{--End mage options--}}
 
                     <button type="submit" class="w-2/4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
                         Save

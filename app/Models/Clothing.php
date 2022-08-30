@@ -18,7 +18,11 @@ class Clothing extends Model implements HasMedia
     use HasFactory, HasTags, InteractsWithMedia;
 
     protected $fillable = [
-        'category_id', 'tags'
+        'category_id', 'tags', 'image_url'
+    ];
+
+    protected $appends = [
+        'image'
     ];
 
     public function seasons(): BelongsToMany
@@ -34,6 +38,10 @@ class Clothing extends Model implements HasMedia
     public function outfit(): BelongsTo
     {
         return $this->belongsTo(Outfit::class);
+    }
+
+    public function getImageAttribute(){
+        return $this->attributes['image_url'] ?? $this->getFirstMediaUrl('outfits');
     }
 
 //    /**

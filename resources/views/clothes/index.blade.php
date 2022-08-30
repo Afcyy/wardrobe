@@ -92,7 +92,7 @@
                                         @foreach($clothing as $item)
                                             <div class="image-holder relative group">
                                                 <img
-                                                    src="{{ $item->getFirstMediaUrl('outfits') }}"
+                                                    src="{{ $item->image }}"
                                                     class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-28 group-hover:brightness-50"
                                                     alt="..."
                                                     data-clothing-id="{{ $item->id }}"
@@ -132,7 +132,7 @@
                                             <div class="image-holder relative group">
                                                 <img
                                                     id="{{ $item->clothing->category->name }}"
-                                                    src="{{ $item->clothing->getFirstMediaUrl('outfits') }}"
+                                                    src="{{ $item->clothing->image }}"
                                                     class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-24 group-hover:brightness-50"
                                                     alt="..."
                                                 />

@@ -15,7 +15,7 @@ export const outfit = document.querySelectorAll('#outfit > div img');
 const activeTabClass = ['font-bold', 'text-blue-500', 'underline', 'underline-offset-4', 'decoration-inherit', 'cursor-pointer', 'hover:text-blue-400'];
 const inactiveTabClass = ['font-medium', 'text-black', 'cursor-pointer', 'hover:text-gray-600'];
 
-if(window.location.href.includes('create')){
+if(window.location.href.includes('create') || window.location.href.includes('edit')){
     const uploadOptions = document.querySelector('select[name="img_options"]');
     const files = document.querySelector('input[name="image"]');
 
@@ -28,13 +28,7 @@ if(window.location.href.includes('create')){
 
     files.addEventListener('change', () => {
        document.getElementById('preview').src = window.URL.createObjectURL(files.files[0]);
-       document.getElementById('uploadSvg').remove();
-    })
-} else if(window.location.href.includes('edit')) {
-    const files = document.querySelector('input[name="image"]');
-
-    files.addEventListener('change', () => {
-       document.getElementById('preview').src = window.URL.createObjectURL(files.files[0]);
+       document.getElementById('uploadSvg')?.remove();
     })
 } else {
     runListeners();

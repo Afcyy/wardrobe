@@ -57,11 +57,15 @@ class ClothingController extends Controller
     {
         $clothing = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
-            'tags' => array_map('trim', explode(',', $request->get('tags')))
+            'tags' => array_map('trim', explode(',', $request->get('tags'))),
+            'image_url' => $request->get('image_url')
         ]);
 
+        if(!$request->get('image_url')){
+            $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+        }
+
         $clothing->seasons()->attach($request->get('season'));
-        $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
 
         return back()->with('success', 'Item was added successfully');
     }
@@ -107,17 +111,22 @@ class ClothingController extends Controller
     {
         $clothing =  auth()->user()->clothings()->find($id);
 
-        $clothing->update([
-           'category_id' => $request->get('category'),
-           'tags' => array_map('trim', explode(',', $request->get('tags')))
-       ]);
-
+        $clothing->category_id = $request->get('category');
+        $clothing->tags = array_map('trim', explode(',', $request->get('tags')));
         $clothing->seasons()->sync($request->get('season'));
 
-        if($request->hasFile('image')){
+        if($request->hasFile('image') || $request->get('image_url')){
             $clothing->clearMediaCollection('outfits');
-            $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+
+            if($request->hasFile('image')){
+                $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+                $clothing->image_url = null;
+            } else {
+                $clothing->image_url = $request->get('image_url');
+            }
         }
+
+        $clothing->save();
 
         return redirect(RouteServiceProvider::HOME)->with('success', 'Item was edited successfully');
     }
