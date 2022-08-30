@@ -29,7 +29,7 @@ class StoreClothingRequest extends FormRequest
         return [
             'category' => 'required|exists:categories,id',
             'season' => 'required|exists:seasons,id',
-            'tags' => 'nullable|string',
+            'tags' => 'required|string',
             'image' => 'required_without:image_url|mimes:jpg,jpeg,png',
             'image_url' => 'nullable|url'
         ];
