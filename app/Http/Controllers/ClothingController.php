@@ -24,7 +24,7 @@ class ClothingController extends Controller
     {
         $clothes = auth()->user()
             ->clothings()
-            ->with(['seasons', 'tags', 'category'])
+            ->with(['seasons', 'tags', 'category', 'media'])
             ->get()
             ->sortBy('category_id')
             ->groupBy('category.name');
