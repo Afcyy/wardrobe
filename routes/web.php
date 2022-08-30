@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/welcome', 'welcome');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/', [ClothingController::class, 'index'])->name('index');
 
