@@ -57,11 +57,14 @@ class ClothingController extends Controller
     {
         $clothing = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
-            'tags' => array_map('trim', explode(',', $request->get('tags'))),
             'image_url' => $request->get('image_url')
         ]);
 
-        if(!$request->get('image_url')){
+        if ($request->get('tags')) {
+            $clothing->syncTags(array_map('trim', explode(',', $request->get('tags'))));
+        }
+
+        if (!$request->get('image_url')) {
             $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
         }
 
@@ -109,16 +112,22 @@ class ClothingController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $clothing =  auth()->user()->clothings()->find($id);
+        $clothing = auth()->user()->clothings()->find($id);
 
         $clothing->category_id = $request->get('category');
-        $clothing->tags = array_map('trim', explode(',', $request->get('tags')));
         $clothing->seasons()->sync($request->get('season'));
 
-        if($request->hasFile('image') || $request->get('image_url')){
+        $clothing->syncTags(
+            $request->get('tags')
+                ? array_map('trim', explode(',', $request->get('tags')))
+                : []
+        );
+
+
+        if ($request->hasFile('image') || $request->get('image_url')) {
             $clothing->clearMediaCollection('outfits');
 
-            if($request->hasFile('image')){
+            if ($request->hasFile('image')) {
                 $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
                 $clothing->image_url = null;
             } else {
