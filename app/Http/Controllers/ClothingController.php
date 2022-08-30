@@ -57,12 +57,15 @@ class ClothingController extends Controller
     {
         $clothing = auth()->user()->clothings()->create([
             'category_id' => $request->get('category'),
-            'tags' => array_map('trim', explode(',', $request->get('tags'))),
             'image_url' => $request->get('image_url')
         ]);
 
         if(!$request->get('image_url')){
             $clothing->addMediaFromRequest('image')->toMediaCollection('outfits');
+        }
+
+        if($request->get('tags')){
+            $clothing->attachTags(array_map('trim', explode(',', $request->get('tags'))),);
         }
 
         $clothing->seasons()->attach($request->get('season'));
@@ -112,8 +115,11 @@ class ClothingController extends Controller
         $clothing =  auth()->user()->clothings()->find($id);
 
         $clothing->category_id = $request->get('category');
-        $clothing->tags = array_map('trim', explode(',', $request->get('tags')));
         $clothing->seasons()->sync($request->get('season'));
+
+        if($request->get('tags')){
+            $clothing->syncTags(array_map('trim', explode(',', $request->get('tags'))));
+        }
 
         if($request->hasFile('image') || $request->get('image_url')){
             $clothing->clearMediaCollection('outfits');
