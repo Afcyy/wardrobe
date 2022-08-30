@@ -5484,15 +5484,21 @@ var outfit = document.querySelectorAll('#outfit > div img');
 var activeTabClass = ['font-bold', 'text-blue-500', 'underline', 'underline-offset-4', 'decoration-inherit', 'cursor-pointer', 'hover:text-blue-400'];
 var inactiveTabClass = ['font-medium', 'text-black', 'cursor-pointer', 'hover:text-gray-600'];
 
-if (window.location.href.includes('create')) {
-  document.querySelector('#upload #tags').addEventListener('keyup', _tags__WEBPACK_IMPORTED_MODULE_5__.createTag);
-  document.querySelector('input[name="image"]').addEventListener('change', function () {
-    document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
-    document.getElementById('uploadSvg').remove();
+if (window.location.href.includes('create') || window.location.href.includes('edit')) {
+  var uploadOptions = document.querySelector('select[name="img_options"]');
+  var files = document.querySelector('input[name="image"]');
+  uploadOptions.addEventListener('change', function (ev) {
+    var inactiveOption = ['image_url', 'dropzone-file'].filter(function (option) {
+      return option !== uploadOptions.value;
+    }).toString();
+    document.getElementById(uploadOptions.value).closest('div .mb-6').classList.remove('hidden');
+    document.getElementById(inactiveOption).closest('div .mb-6').classList.add('hidden');
   });
-} else if (window.location.href.includes('edit')) {
-  document.querySelector('input[name="image"]').addEventListener('change', function () {
-    document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+  files.addEventListener('change', function () {
+    var _document$getElementB;
+
+    document.getElementById('preview').src = window.URL.createObjectURL(files.files[0]);
+    (_document$getElementB = document.getElementById('uploadSvg')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.remove();
   });
 } else {
   runListeners();
@@ -5536,19 +5542,19 @@ function showActions() {
 }
 
 function switchTabTo(activeTab) {
-  var _document$getElementB, _document$getElementB2, _document$getElementB3, _document$getElementB4;
+  var _document$getElementB2, _document$getElementB3, _document$getElementB4, _document$getElementB5;
 
   var inactiveTab = ['wardrobe-tab', 'outfits-tab'].filter(function (tab) {
     return tab !== activeTab;
   }).toString();
 
-  (_document$getElementB = document.getElementById(activeTab).classList).remove.apply(_document$getElementB, inactiveTabClass);
+  (_document$getElementB2 = document.getElementById(activeTab).classList).remove.apply(_document$getElementB2, inactiveTabClass);
 
-  (_document$getElementB2 = document.getElementById(activeTab).classList).add.apply(_document$getElementB2, activeTabClass);
+  (_document$getElementB3 = document.getElementById(activeTab).classList).add.apply(_document$getElementB3, activeTabClass);
 
-  (_document$getElementB3 = document.getElementById(inactiveTab).classList).remove.apply(_document$getElementB3, activeTabClass);
+  (_document$getElementB4 = document.getElementById(inactiveTab).classList).remove.apply(_document$getElementB4, activeTabClass);
 
-  (_document$getElementB4 = document.getElementById(inactiveTab).classList).add.apply(_document$getElementB4, inactiveTabClass);
+  (_document$getElementB5 = document.getElementById(inactiveTab).classList).add.apply(_document$getElementB5, inactiveTabClass);
 
   if (activeTab === 'outfits-tab') {
     document.getElementById("accordion").classList.add('hidden');

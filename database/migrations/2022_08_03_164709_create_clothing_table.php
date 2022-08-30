@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('clothing', function (Blueprint $table) {
             $table->id();
+            $table->string('image_url')->nullable();
             $table->foreignId('category_id')
                 ->references('id')
                 ->on('categories')

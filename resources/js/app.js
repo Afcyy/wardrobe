@@ -15,16 +15,20 @@ export const outfit = document.querySelectorAll('#outfit > div img');
 const activeTabClass = ['font-bold', 'text-blue-500', 'underline', 'underline-offset-4', 'decoration-inherit', 'cursor-pointer', 'hover:text-blue-400'];
 const inactiveTabClass = ['font-medium', 'text-black', 'cursor-pointer', 'hover:text-gray-600'];
 
-if(window.location.href.includes('create')){
-    document.querySelector('#upload #tags').addEventListener('keyup', createTag);
+if(window.location.href.includes('create') || window.location.href.includes('edit')){
+    const uploadOptions = document.querySelector('select[name="img_options"]');
+    const files = document.querySelector('input[name="image"]');
 
-    document.querySelector('input[name="image"]').addEventListener('change', () => {
-       document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
-       document.getElementById('uploadSvg').remove();
+    uploadOptions.addEventListener('change', (ev) => {
+        const inactiveOption = ['image_url', 'dropzone-file'].filter(option => option !== uploadOptions.value).toString();
+
+        document.getElementById(uploadOptions.value).closest('div .mb-6').classList.remove('hidden');
+        document.getElementById(inactiveOption).closest('div .mb-6').classList.add('hidden');
     })
-} else if(window.location.href.includes('edit')) {
-    document.querySelector('input[name="image"]').addEventListener('change', () => {
-       document.getElementById('preview').src = window.URL.createObjectURL(document.querySelector('input[name="image"]').files[0]);
+
+    files.addEventListener('change', () => {
+       document.getElementById('preview').src = window.URL.createObjectURL(files.files[0]);
+       document.getElementById('uploadSvg')?.remove();
     })
 } else {
     runListeners();

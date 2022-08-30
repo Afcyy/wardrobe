@@ -7,8 +7,8 @@
                 <div class="flex flex-col items-center justify-center">
                     {{-- Hat --}}
                     <p id="randomize"
-                       class="flex justify-center items-center text-sm text-blue-500 cursor-pointer mx-2">Randomize<i
-                            class="stroke-indigo-500 w-4 mx-1" data-feather="shuffle"></i></p>
+                       class="flex justify-center items-center text-sm font-medium text-blue-500 cursor-pointer mx-2">Randomize<i
+                            class="stroke-blue-500 w-4 mx-1" data-feather="shuffle"></i></p>
                     <div class="relative group">
                         <img id="hats" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
@@ -92,7 +92,7 @@
                                         @foreach($clothing as $item)
                                             <div class="image-holder relative group">
                                                 <img
-                                                    src="{{ $item->getFirstMediaUrl('outfits') }}"
+                                                    src="{{ $item->image }}"
                                                     class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-28 group-hover:brightness-50"
                                                     alt="..."
                                                     data-clothing-id="{{ $item->id }}"
@@ -132,7 +132,7 @@
                                             <div class="image-holder relative group">
                                                 <img
                                                     id="{{ $item->clothing->category->name }}"
-                                                    src="{{ $item->clothing->getFirstMediaUrl('outfits') }}"
+                                                    src="{{ $item->clothing->image }}"
                                                     class="my-2 mx-2 p-1 bg-white border rounded lg:h-32 h-24 group-hover:brightness-50"
                                                     alt="..."
                                                 />

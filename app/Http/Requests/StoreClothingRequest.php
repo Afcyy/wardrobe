@@ -30,7 +30,8 @@ class StoreClothingRequest extends FormRequest
             'category' => 'required|exists:categories,id',
             'season' => 'required|exists:seasons,id',
             'tags' => 'required|string',
-            'image' => 'required|mimes:jpg,jpeg,png'
+            'image' => 'required_without:image_url|mimes:jpg,jpeg,png',
+            'image_url' => 'nullable|url'
         ];
     }
 
@@ -44,8 +45,6 @@ class StoreClothingRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator): RedirectResponse
     {
-//        dd($validator->errors()->getMessages());
-
         session()->put('error', $validator->errors()->getMessages());
 
         throw (new ValidationException($validator))
