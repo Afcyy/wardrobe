@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/', 'welcome')->name('welcome')->middleware('guest');
+
 Route::middleware('auth')->group(function () {
-    Route::get('/', [ClothingController::class, 'index'])->name('index');
+    Route::get('/dashboard', [ClothingController::class, 'index'])->name('index');
 
     Route::resource('clothes', ClothingController::class)->except(['index']);
     Route::post('save-outfit', [OutfitsController::class, 'store'])->name('save.outfit');

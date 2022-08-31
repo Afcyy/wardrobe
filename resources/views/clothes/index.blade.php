@@ -18,21 +18,21 @@
                     <div class="flex flex-row my-1">
                         {{-- Accessory 1 --}}
                         <div class="relative group">
-                            <img id="accessories-1" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                            <img id="accessories-1" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                             <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                                 Click to remove</p>
                         </div>
                         {{-- Top --}}
                         <div class="relative group">
-                            <img id="tops" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                            <img id="tops" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                             <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                                 Click to remove</p>
                         </div>
                         {{-- Accessory 2 --}}
                         <div class="relative group">
-                            <img id="accessories-2" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                            <img id="accessories-2" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                             <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                                 Click to remove</p>
@@ -40,14 +40,14 @@
                     </div>
                     {{-- Bottom --}}
                     <div class="relative group">
-                        <img id="bottoms" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                        <img id="bottoms" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                         <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-xs text-blue-500 cursor-default">
                             Click to remove</p>
                     </div>
                     {{-- Shoes --}}
                     <div class="relative group">
-                        <img id="shoes" class="lg:h-36 w-24 h-24 bg-white my-1 object-cover"
+                        <img id="shoes" class="lg:h-36 w-24 h-24 bg-white my-1 object-scale-down"
                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAA1BMVEX///+nxBvIAAAAR0lEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPBgxUwAAU+n3sIAAAAASUVORK5CYII="/>
                         <p class="opacity-0 absolute inset-0 z-10 flex justify-center items-center text-center text-sm text-blue-500 cursor-default">
                             Click to remove</p>
