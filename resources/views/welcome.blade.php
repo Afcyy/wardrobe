@@ -188,7 +188,7 @@
             </div>
         </div>
 
-        <div class="text-gray-700 bg-white body-font border-t-2 border-gray-300">
+        <div class="text-gray-700 bg-white body-font border-t border-gray-50">
             <div class="container flex flex-col justify-center items-center px-8 py-8 mx-auto max-w-7xl sm:flex-row">
                 <p class="text-sm font-bold leading-none text-blue-500 select-none logo">{{ config('app.name') }}</p>
                 <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">© 2022
