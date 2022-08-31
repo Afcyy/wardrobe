@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
         <!-- Scripts -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -41,12 +42,12 @@
         <meta property="twitter:image" content="{{ asset('images/meta-cover.png') }}">
 
     </head>
-    <body class="font-satoshi antialiased">
+    <body class="font-inter antialiased">
         <div class="h-screen bg-gray-100">
 
             <header class="flex flex-row py-4 w-11/12 sm:flex-col break-words absolute left-1/2 transform -translate-x-1/2">
                 <div class="w-full flex justify-between items-center">
-                    <a href="{{ route('index') }}"><h1 class="text-xl text-blue-500 font-bold">Peacedrobe</h1></a>
+                    <a href="{{ route('index') }}"><h1 class="text-xl text-blue-500 font-bold">{{ config('app.name') }}</h1></a>
                     <form action="{{ route('logout') }}" method="POST">
                         {{ csrf_field() }}
                         <button type="submit" class="bg-red-500 text-white text-sm rounded-md py-2 px-4 hover:bg-red-400">Log out</button>
