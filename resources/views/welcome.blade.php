@@ -1,39 +1,39 @@
 <x-guest-layout>
-    <div class="w-full px-6 pb-12 antialiased bg-white">
-        <div class="mx-auto max-w-7xl h-screen">
-
-            <nav class="relative z-50 h-24 select-none">
-                <div class="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium border-b border-gray-200 md:overflow-visible lg:justify-between sm:px-4 md:px-2 lg:px-0">
-                    <div class="flex items-center justify-start w-1/4 h-full pr-4">
-                        <a href="#_" class="inline-block py-4 md:py-0">
-                            <span class="p-1 text-xl text-blue-500 font-bold">{{ config('app.name') }}</span>
-                        </a>
+    <div class="w-full px-6 pb-6 antialiased bg-white">
+        <div class="mx-auto max-w-7xl">
+            <div class="h-screen">
+                <nav class="relative z-50 h-24 select-none">
+                    <div class="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium border-b border-gray-200 md:overflow-visible lg:justify-between sm:px-4 md:px-2 lg:px-0">
+                        <div class="flex items-center justify-start w-1/4 h-full pr-4">
+                            <a href="#_" class="inline-block py-4 md:py-0">
+                                <span class="p-1 text-xl text-blue-500 font-bold">{{ config('app.name') }}</span>
+                            </a>
+                        </div>
+                        <div class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
+                            <a href="{{ route('login') }}" class="w-full px-3 py-2 mr-0 text-gray-700 md:mr-2 lg:mr-3 md:w-auto">Sign In</a>
+                            <a href="{{ route('register') }}" class="inline-flex items-center px-6 py-3 text-sm font-medium leading-4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Sign Up</a>
+                        </div>
                     </div>
-                    <div class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
-                        <a href="{{ route('login') }}" class="w-full px-3 py-2 mr-0 text-gray-700 md:mr-2 lg:mr-3 md:w-auto">Sign In</a>
-                        <a href="{{ route('register') }}" class="inline-flex items-center px-6 py-3 text-sm font-medium leading-4 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Sign Up</a>
+                </nav>
+
+                <!-- Main Hero Content -->
+                <div class="h-full flex flex-col max-w-lg px-4 mx-auto mt-px text-left md:max-w-none md:text-center justify-center items-center">
+                    <h1 class="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl"><span class="inline md:block lg:mb-2">Easily Plan Your</span> <span class="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-blue-500 md:inline-block justify-center lg:inline lg:mt-2">Next Drippy Outfit</span></h1>
+                    <div class="mx-auto mt-5 text-gray-500 md:mt-12 md:max-w-lg md:text-center lg:text-lg">Avoid the mess in your wardrobe and easily create a drippy outfit, lightning fast.</div>
+                    <div class="flex flex-col items-center mt-12 text-center">
+                    <span class="relative inline-flex w-full md:w-auto">
+                        <a href="{{ route('index') }}" type="button" class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Get Started</a>
+                        <span class="flex absolute top-0 right-0 px-2 py-1 -mt-3 -mr-6 text-xs font-medium leading-tight text-white bg-green-400 rounded-full">It's free
+                            <img class="ml-1 w-4" src="{{ asset('images/shushing-face.png') }}" alt="Shushing Face Emoji"></span>
+                    </span>
+                        <p class="mt-3 text-sm text-blue-500">Scroll down to learn more</p>
                     </div>
                 </div>
-            </nav>
-
-            <!-- Main Hero Content -->
-            <div class="h-full flex flex-col max-w-lg px-4 mx-auto mt-px text-left md:max-w-none md:text-center justify-center items-center">
-                <h1 class="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl"><span class="inline md:block lg:mb-2">Easily Plan Your</span> <span class="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-blue-500 md:inline-block justify-center lg:inline lg:mt-2">Next Drippy Outfit</span></h1>
-                <div class="mx-auto mt-5 text-gray-500 md:mt-12 md:max-w-lg md:text-center lg:text-lg">Avoid the mess in your wardrobe and easily create a drippy outfit, lightning fast.</div>
-                <div class="flex flex-col items-center mt-12 text-center">
-                <span class="relative inline-flex w-full md:w-auto">
-                    <a href="{{ route('index') }}" type="button" class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Get Started</a>
-                    <span class="flex absolute top-0 right-0 px-2 py-1 -mt-3 -mr-6 text-xs font-medium leading-tight text-white bg-green-400 rounded-full">It's free
-                        <img class="ml-1 w-4" src="{{ asset('images/shushing-face.png') }}" alt="Shushing Face Emoji"></span>
-                </span>
-                    <p class="mt-3 text-sm text-blue-500">Scroll down to learn more</p>
-                </div>
+                <!-- End Main Hero Content -->
             </div>
-            <!-- End Main Hero Content -->
-
         </div>
     </div>
-    <div class="w-full bg-white pt-7 pb-7">
+    <div class="w-full bg-white pt-5 pb-5">
         <div class="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row max-w-7xl lg:px-16">
 
             <!-- Image -->
