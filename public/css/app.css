@@ -4760,20 +4760,14 @@ textarea.form-control.is-invalid {
 .pt-8 {
   padding-top: 2rem;
 }
-.pb-12 {
-  padding-bottom: 3rem;
-}
 .pr-4 {
   padding-right: 1rem;
 }
 .pt-4 {
   padding-top: 1rem;
 }
-.pt-7 {
-  padding-top: 1.75rem;
-}
-.pb-7 {
-  padding-bottom: 1.75rem;
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 .pl-6 {
   padding-left: 1.5rem;
@@ -4799,23 +4793,17 @@ textarea.form-control.is-invalid {
 .pb-1 {
   padding-bottom: 0.25rem;
 }
-.pb-5 {
-  padding-bottom: 1.25rem;
-}
 .text-left {
   text-align: left;
 }
 .text-center {
   text-align: center;
 }
-.font-satoshi {
-  font-family: Satoshi, sans-serif;
+.font-inter {
+  font-family: Inter var, sans-serif;
 }
 .font-sans {
   font-family: Inter, sans-serif;
-}
-.font-inter {
-  font-family: Inter var, sans-serif;
 }
 .text-sm {
   font-size: .875rem;
